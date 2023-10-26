@@ -1,4 +1,6 @@
 package com.rpll.kantinhb.utils
 
-class BackPress {
+sealed class BackPress {
+    object Idle : BackPress()
+    object InitialTouch : BackPress()
 }
