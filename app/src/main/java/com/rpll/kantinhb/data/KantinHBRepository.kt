@@ -45,39 +45,39 @@ class KantinHBRepository {
 //                }
 //            }
 //        }
-//    }
+    }
 
-        fun getIsQuickLogin(): Flow<MutableState<Boolean>> {
-            return flowOf(isQuickLogin)
-        }
+    fun getIsQuickLogin(): Flow<MutableState<Boolean>> {
+        return flowOf(isQuickLogin)
+    }
 
-        fun updateIsQuickLogin(newValue: Boolean) {
-            isQuickLogin.value = newValue
-        }
+    fun updateIsQuickLogin(newValue: Boolean) {
+        isQuickLogin.value = newValue
+    }
 
-        fun getMyFavorite(): Flow<List<Long>> {
-            return flowOf(myFavorites)
-        }
+    fun getMyFavorite(): Flow<List<Long>> {
+        return flowOf(myFavorites)
+    }
 
-        fun addToFavorite(productId: Long) {
-            myFavorites.add(productId)
-        }
+    fun addToFavorite(productId: Long) {
+        myFavorites.add(productId)
+    }
 
-        fun removeFromMyFavorite(productId: Long) {
-            myFavorites.remove(productId)
-        }
+    fun removeFromMyFavorite(productId: Long) {
+        myFavorites.remove(productId)
+    }
 
-        fun getAllPromotions(): Flow<List<Int>> {
-            return flowOf(promotions)
-        }
+    fun getAllPromotions(): Flow<List<Int>> {
+        return flowOf(promotions)
+    }
 
-        fun getAllCategories(): Flow<List<Category>> {
-            return flowOf(categories)
-        }
+    fun getAllCategories(): Flow<List<Category>> {
+        return flowOf(categories)
+    }
 
-        fun getSpecialSelection(): Flow<List<ProductItem>> {
-            return flowOf(specialSelection)
-        }
+    fun getSpecialSelection(): Flow<List<ProductItem>> {
+        return flowOf(specialSelection)
+    }
 
 //    fun getProductByCategoryId(categoryId: Int): Flow<List<ProductItem>> {
 //        Log.e("Product By ID","CALLED IN HERE")
@@ -134,9 +134,9 @@ class KantinHBRepository {
 //        return flowOf(result)
 //    }
 
-        fun getAllProductInCart(): Flow<List<OrderItem>> {
-            return flowOf(orders)
-        }
+    fun getAllProductInCart(): Flow<List<OrderItem>> {
+        return flowOf(orders)
+    }
 
 //    fun getOrderById(productId: Long): List<OrderItem> {
 //        return orders.filter {
@@ -144,16 +144,15 @@ class KantinHBRepository {
 //        }
 //    }
 
-//    companion object {
-//        @Volatile
-//        private var instance: KantinHBRepository? = null
-//
-//        fun getInstance(): KantinHBRepository =
-//            instance ?: synchronized(this) {
-//                KantinHBRepository().apply {
-//                    instance = this
-//                }
-//            }
-//    }
+    companion object {
+        @Volatile
+        private var instance: KantinHBRepository? = null
+
+        fun getInstance(): KantinHBRepository =
+            instance ?: synchronized(this) {
+                KantinHBRepository().apply {
+                    instance = this
+                }
+            }
     }
 }
