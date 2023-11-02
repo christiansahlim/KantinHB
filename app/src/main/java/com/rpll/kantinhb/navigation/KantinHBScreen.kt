@@ -1,6 +1,6 @@
 package com.rpll.kantinhb.navigation
 
-class KantinHBScreen (val route: String) {
+sealed class KantinHBScreen (val route: String) {
     object HomeScreen: KantinHBScreen("home_screen")
     object DetailScreen: KantinHBScreen("detail_screen")
     object CartScreen: KantinHBScreen("cart_screen")

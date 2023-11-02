@@ -25,26 +25,26 @@ class KantinHBRepository {
     private val productsFavorites = mutableListOf<ProductItem>()
 
     init {
-//        if (promotions.isEmpty()) {
-//            DataSource.promotions().forEach {
-//                promotions.add(it)
-//            }
-//        }
+        if (promotions.isEmpty()) {
+            DataSource.promotions().forEach {
+                promotions.add(it)
+            }
+        }
 
-//        if (categories.isEmpty()) {
-//            DataSource.categories().forEach {
-//                categories.add(it)
-//            }
-//        }
+        if (categories.isEmpty()) {
+            DataSource.categories().forEach {
+                categories.add(it)
+            }
+        }
 
 
-//        if (specialSelection.isEmpty()) {
-//            DataSource.products().forEach {
-//               if(it.id in specialSelectionById){
-//                    specialSelection.add(it)
-//                }
-//            }
-//        }
+        if (specialSelection.isEmpty()) {
+            DataSource.products().forEach {
+               if(it.id in specialSelectionById){
+                    specialSelection.add(it)
+                }
+            }
+        }
     }
 
     fun getIsQuickLogin(): Flow<MutableState<Boolean>> {
@@ -79,60 +79,60 @@ class KantinHBRepository {
         return flowOf(specialSelection)
     }
 
-//    fun getProductByCategoryId(categoryId: Int): Flow<List<ProductItem>> {
-//        Log.e("Product By ID","CALLED IN HERE")
-//        productsByCategoryId.clear()
-//        DataSource.products().filter {
-//            it.category_id == categoryId
-//        }.forEach { product ->
-//            productsByCategoryId.add(product)
-//        }
-//
-//       return flowOf(productsByCategoryId)
-//    }
+    fun getProductByCategoryId(categoryId: Int): Flow<List<ProductItem>> {
+        Log.e("Product By ID","CALLED IN HERE")
+        productsByCategoryId.clear()
+        DataSource.products().filter {
+            it.category_id == categoryId
+        }.forEach { product ->
+            productsByCategoryId.add(product)
+        }
 
-//    fun getProductFavorites(): Flow<List<ProductItem>> {
-//        productsFavorites.clear()
-//        DataSource.products().filter {
-//            myFavorites.contains(it.id)
-//        }.forEach { product ->
-//            productsFavorites.add(product)
-//        }
-//
-//        return flowOf(productsFavorites)
-//    }
+       return flowOf(productsByCategoryId)
+    }
 
-//    fun addProductToCart(product: ProductItem, total: Int){
-//        orders.add(
-//            OrderItem(
-//                item = product,
-//                count = total
-//            )
-//        )
-//    }
+    fun getProductFavorites(): Flow<List<ProductItem>> {
+        productsFavorites.clear()
+        DataSource.products().filter {
+            myFavorites.contains(it.id)
+        }.forEach { product ->
+            productsFavorites.add(product)
+        }
 
-//    fun updateProductInCart(productId: Long, total: Int): Flow<Boolean> {
-//        val index = orders.indexOfFirst { it.item.id == productId }
-//        val result = if (index >= 0) {
-//            val order = orders[index]
-//            orders[index] = order.copy(item = order.item, count = total)
-//            true
-//        } else {
-//            false
-//        }
-//        return flowOf(result)
-//    }
+        return flowOf(productsFavorites)
+    }
 
-//    fun removeProductFromCart(productId: Long): Flow<Boolean> {
-//        val index = orders.indexOfFirst { it.item.id == productId }
-//        val result = if (index >= 0) {
-//            orders.removeAt(index)
-//            true
-//        } else {
-//            false
-//        }
-//        return flowOf(result)
-//    }
+    fun addProductToCart(product: ProductItem, total: Int){
+        orders.add(
+            OrderItem(
+                item = product,
+                count = total
+            )
+        )
+    }
+
+    fun updateProductInCart(productId: Long, total: Int): Flow<Boolean> {
+        val index = orders.indexOfFirst { it.item.id == productId }
+        val result = if (index >= 0) {
+            val order = orders[index]
+            orders[index] = order.copy(item = order.item, count = total)
+            true
+        } else {
+            false
+        }
+        return flowOf(result)
+    }
+
+    fun removeProductFromCart(productId: Long): Flow<Boolean> {
+        val index = orders.indexOfFirst { it.item.id == productId }
+        val result = if (index >= 0) {
+            orders.removeAt(index)
+            true
+        } else {
+            false
+        }
+        return flowOf(result)
+    }
 
     fun getAllProductInCart(): Flow<List<OrderItem>> {
         return flowOf(orders)
