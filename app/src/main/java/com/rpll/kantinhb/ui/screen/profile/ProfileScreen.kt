@@ -29,6 +29,8 @@ import com.rpll.kantinhb.ui.common.UiState
 import com.rpll.kantinhb.ui.theme.VividGreen_100
 import com.rpll.kantinhb.ui.theme.VividGreen_500
 import com.rpll.kantinhb.R
+import com.rpll.kantinhb.ui.components.TitleSubtitle
+import com.rpll.kantinhb.ui.components.TopBackBar
 
 @Composable
 fun ProfileScreen(
