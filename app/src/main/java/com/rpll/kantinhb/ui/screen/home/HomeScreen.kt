@@ -1,3 +1,5 @@
+package com.rpll.kantinhb.ui.screen.home
+
 import android.content.res.Configuration
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
@@ -23,6 +25,18 @@ import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
+import com.rpll.kantinhb.di.Injection
+import com.rpll.kantinhb.navigation.KantinHBScreen
+import com.rpll.kantinhb.ui.ViewModelFactory
+import com.rpll.kantinhb.ui.common.UiState
+import com.rpll.kantinhb.ui.components.Carousel
+import com.rpll.kantinhb.ui.components.CategoryItem
+import com.rpll.kantinhb.ui.components.DotsIndicator
+import com.rpll.kantinhb.ui.components.Loader
+import com.rpll.kantinhb.ui.components.ProductItem01
+import com.rpll.kantinhb.ui.components.TitleSubtitle
+import com.rpll.kantinhb.ui.components.TopHomeBar
+import com.rpll.kantinhb.utils.BackPress
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalPagerApi::class)
@@ -33,7 +47,7 @@ fun HomeScreen(
         factory = ViewModelFactory(Injection.provideRepository())
     ),
     isAddedNewItem: Boolean? = false
-){
+) {
     //Screen config
     val configuration = LocalConfiguration.current
 
@@ -43,9 +57,9 @@ fun HomeScreen(
     var backPressState by remember { mutableStateOf<BackPress>(BackPress.Idle) }
     val context = LocalContext.current
 
-    if(showToast){
+    if (showToast) {
         Toast.makeText(context, "Press again to exit", Toast.LENGTH_SHORT).show()
-        showToast= false
+        showToast = false
     }
 
 
@@ -80,10 +94,10 @@ private fun AppContent(
         topBar = {
             TopHomeBar(
                 goToCart = {
-                    navController.navigate(SpatulaScreen.CartScreen.route)
+                    navController.navigate(KantinHBScreen.CartScreen.route)
                 },
                 goToDetail = {
-                    navController.navigate(SpatulaScreen.ProfileScreen.route)
+                    navController.navigate(KantinHBScreen.ProfileScreen.route)
                 },
                 isAddedNewItem = isAddedNewItem
             )
@@ -102,12 +116,14 @@ private fun AppContent(
                     is UiState.Loading -> {
                         viewModel.getAllPromotions()
                     }
+
                     is UiState.Success -> {
                         Box {
                             when (configuration.orientation) {
                                 Configuration.ORIENTATION_LANDSCAPE -> {
                                     Carousel(uiState.data, carouselState, width = 550)
                                 }
+
                                 else -> {
                                     Carousel(uiState.data, carouselState)
                                 }
@@ -124,6 +140,7 @@ private fun AppContent(
                             }
                         }
                     }
+
                     is UiState.Error -> {}
                 }
             }
@@ -142,6 +159,7 @@ private fun AppContent(
                         viewModel.getAllCategories()
                         Loader(Modifier.size(80.dp))
                     }
+
                     is UiState.Success -> {
                         LazyRow(
                             horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -155,6 +173,7 @@ private fun AppContent(
                             }
                         }
                     }
+
                     is UiState.Error -> {}
                 }
             }
@@ -168,6 +187,7 @@ private fun AppContent(
                     is UiState.Loading -> {
                         viewModel.getMyFavorites()
                     }
+
                     is UiState.Success -> {
                         val listOfFavorite = uiState.data
 
@@ -177,6 +197,7 @@ private fun AppContent(
                                     viewModel.getSelectedProduct()
                                     Loader(Modifier.size(80.dp))
                                 }
+
                                 is UiState.Success -> {
                                     LazyVerticalGrid(
                                         columns = GridCells.Adaptive(170.dp),
@@ -197,10 +218,12 @@ private fun AppContent(
                                         }
                                     }
                                 }
+
                                 is UiState.Error -> {}
                             }
                         }
                     }
+
                     is UiState.Error -> {}
                 }
             }
