@@ -3,6 +3,12 @@ package com.rpll.kantinhb.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rpll.kantinhb.data.KantinHBRepository
+import com.rpll.kantinhb.ui.screen.cart.CartViewModel
+import com.rpll.kantinhb.ui.screen.category.CategoryViewModel
+import com.rpll.kantinhb.ui.screen.detail.DetailViewModel
+import com.rpll.kantinhb.ui.screen.home.HomeViewModel
+import com.rpll.kantinhb.ui.screen.my_favorite.MyFavoriteViewModel
+import com.rpll.kantinhb.ui.screen.profile.ProfileViewModel
 
 class ViewModelFactory(private val repository: KantinHBRepository) :
     ViewModelProvider.NewInstanceFactory() {
