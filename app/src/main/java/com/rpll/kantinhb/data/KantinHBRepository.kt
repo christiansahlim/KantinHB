@@ -138,11 +138,11 @@ class KantinHBRepository {
         return flowOf(orders)
     }
 
-//    fun getOrderById(productId: Long): List<OrderItem> {
-//        return orders.filter {
-//            it.item.id == productId
-//        }
-//    }
+    fun getOrderById(productId: Long): List<OrderItem> {
+        return orders.filter {
+            it.item.id == productId
+        }
+    }
 
     companion object {
         @Volatile

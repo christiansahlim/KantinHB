@@ -10,9 +10,9 @@ import com.rpll.kantinhb.ui.screen.detail.DetailScreen
 import com.rpll.kantinhb.ui.screen.profile.ProfileScreen
 import com.rpll.kantinhb.ui.screen.category.CategoryScreen
 import com.rpll.kantinhb.ui.screen.cart.CartScreen
-import com.rpll.kantinhb.ui.screen.successAddToCart.SuccessAddToCart
 import com.rpll.kantinhb.ui.screen.favorite.FavoriteStatus
 import com.rpll.kantinhb.ui.screen.my_favorite.MyFavoriteScreen
+import com.rpll.kantinhb.ui.screen.successAddToCart.SuccessAddToCart
 
 @Composable
 fun NavigationBuilder() {
