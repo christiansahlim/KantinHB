@@ -103,7 +103,7 @@ fun ProductItem03(
                         .data(order.item.image_url)
                         .crossfade(true)
                         .build(),
-                    placeholder = painterResource(R.drawable.spatula_logo_bg),
+                    placeholder = painterResource(R.drawable.kantinhb_logo_bg),
                     error = painterResource(id = R.drawable.placeholder),
                     contentDescription = "Product image",
                     contentScale = ContentScale.Fit,

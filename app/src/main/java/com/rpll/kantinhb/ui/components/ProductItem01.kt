@@ -35,8 +35,6 @@ import com.rpll.kantinhb.R
 import com.rpll.kantinhb.ui.screen.my_favorite.MyFavoriteViewModel
 import com.rpll.kantinhb.ui.theme.VividGreen_100
 import com.rpll.kantinhb.utils.Utils.toRupiah
-import com.rpll.kantinhb.model.ProductItem
-import com.rpll.kantinhb.ui.screen.home.HomeViewModel
 
 @Composable
 fun ProductItem01(
@@ -69,7 +67,7 @@ fun ProductItem01(
                             .data(product.image_url)
                             .crossfade(true)
                             .build(),
-                        placeholder = painterResource(R.drawable.spatula_logo_bg),
+                        placeholder = painterResource(R.drawable.kantinhb_logo_bg),
                         error = painterResource(id = R.drawable.placeholder),
                         contentDescription = "Product image",
                         contentScale = ContentScale.Fit,
@@ -217,7 +215,7 @@ fun ProductItem01(
                             .data(product.image_url)
                             .crossfade(true)
                             .build(),
-                        placeholder = painterResource(R.drawable.spatula_logo_bg),
+                        placeholder = painterResource(R.drawable.kantinhb_logo_bg),
                         error = painterResource(id = R.drawable.placeholder),
                         contentDescription = "Product image",
                         contentScale = ContentScale.Fit,

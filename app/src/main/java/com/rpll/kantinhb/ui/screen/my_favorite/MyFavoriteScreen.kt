@@ -51,7 +51,7 @@ fun MyFavoriteScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CustomTopNavigationBar(title = "My Cart", navController = navController, onClickAction = {
-            navController.navigate(SpatulaScreen.HomeScreen.route)
+            navController.navigate(KantinHBScreen.HomeScreen.route)
         })
 
         viewModel.favoriteUiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
