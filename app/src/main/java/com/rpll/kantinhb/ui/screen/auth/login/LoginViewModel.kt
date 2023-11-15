@@ -1,63 +1,42 @@
 package com.rpll.kantinhb.ui.screen.auth.login
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rpll.kantinhb.data.KantinHBRepository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import com.rpll.kantinhb.data.repository.KantinHBRepository
+import com.rpll.kantinhb.ui.common.UiState
+import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: KantinHBRepository) : ViewModel() {
-    // MutableState untuk menyimpan visibilitas password
-    private val _passwordVisibility = MutableStateFlow(false)
-    val passwordVisibility: StateFlow<Boolean> = _passwordVisibility
 
-    // MutableState untuk fungsi remember me pada password
-    private val _passwordRemember = MutableStateFlow(false)
-    val passwordRemember: StateFlow<Boolean> = _passwordRemember
+    // MutableState untuk menyimpan status login
+    private var _isLoggedIn by mutableStateOf(false)
+    val isLoggedIn: Boolean get() = _isLoggedIn
 
-    // MutableState untuk menyimpan nilai teks email dan password
-    private val _emailValue = MutableStateFlow("")
-    val emailValue: StateFlow<String> = _emailValue
+    // MutableState untuk menyimpan pesan kesalahan login
+    private var _errorText by mutableStateOf<String?>(null)
+    val errorText: String? get() = _errorText
 
-    private val _passwordValue = MutableStateFlow("")
-    val passwordValue: StateFlow<String> = _passwordValue
-
-    fun togglePasswordVisibility() {
-        _passwordVisibility.value = !_passwordVisibility.value
-    }
-
-    fun toggleRememberMe() {
-        _passwordRemember.value = !_passwordRemember.value
-    }
-
-    fun setEmailValue(email: String) {
-        _emailValue.value = email
-    }
-
-    fun setPasswordValue(password: String) {
-        _passwordValue.value = password
-    }
-
-    fun performLogin() {
-        val email = emailValue.value
-        val password = passwordValue.value
-
-        if (isValidEmail(email) && isValidPassword(password)) {
-            // Implement login logic here
-            // You can call your repository to handle the login process
-            // repository.login(email, password)
+    // Fungsi untuk melakukan login
+    fun performLogin(email: String, password: String) {
+        viewModelScope.launch {
+//            try {
+//                val result = repository.login(email, password)
+//
+//                if (result is UiState.Success) {
+//                    // Login berhasil
+//                    _isLoggedIn = true
+//                } else if (result is UiState.Error) {
+//                    // Login gagal, atur pesan kesalahan
+//                    _errorText = "Login failed. ${result.errorMessage ?: "Unknown error"}"
+//                }
+//            } catch (e: Exception) {
+//                // Tangani exception jika terjadi kesalahan selama proses login
+//                _errorText = "An unexpected error occurred."
+//            }
         }
     }
-
-    private fun isValidEmail(email: String): Boolean {
-        // Implement email validation logic here
-        // Return true if the email is valid, otherwise return false
-        return true
-    }
-
-    private fun isValidPassword(password: String): Boolean {
-        // Implement password validation logic here
-        // Return true if the password is valid, otherwise return false
-        return true
-    }
 }
+

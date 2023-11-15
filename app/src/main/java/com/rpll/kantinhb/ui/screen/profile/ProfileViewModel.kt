@@ -3,7 +3,7 @@ package com.rpll.kantinhb.ui.screen.profile
 import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rpll.kantinhb.data.KantinHBRepository
+import com.rpll.kantinhb.data.repository.KantinHBRepository
 import com.rpll.kantinhb.ui.common.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -2,7 +2,7 @@ package com.rpll.kantinhb.ui.screen.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rpll.kantinhb.data.KantinHBRepository
+import com.rpll.kantinhb.data.repository.KantinHBRepository
 import com.rpll.kantinhb.model.Category
 import com.rpll.kantinhb.model.ProductItem
 import com.rpll.kantinhb.ui.common.UiState

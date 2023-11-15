@@ -3,7 +3,7 @@ package com.rpll.kantinhb.ui.screen.cart
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rpll.kantinhb.data.KantinHBRepository
+import com.rpll.kantinhb.data.repository.KantinHBRepository
 import com.rpll.kantinhb.model.OrderItem
 import com.rpll.kantinhb.ui.common.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
