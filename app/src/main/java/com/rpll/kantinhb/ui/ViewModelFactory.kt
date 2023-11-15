@@ -2,7 +2,9 @@ package com.rpll.kantinhb.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.rpll.kantinhb.data.KantinHBRepository
+import com.rpll.kantinhb.data.repository.KantinHBRepository
+import com.rpll.kantinhb.ui.screen.auth.login.LoginViewModel
+import com.rpll.kantinhb.ui.screen.auth.register.RegisterViewModel
 import com.rpll.kantinhb.ui.screen.cart.CartViewModel
 import com.rpll.kantinhb.ui.screen.category.CategoryViewModel
 import com.rpll.kantinhb.ui.screen.detail.DetailViewModel
@@ -28,6 +30,10 @@ class ViewModelFactory(private val repository: KantinHBRepository) :
         } else if (modelClass.isAssignableFrom(MyFavoriteViewModel::class.java)) {
             return MyFavoriteViewModel(repository) as T
         }
+//        else if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
+//            return LoginViewModel(repository) as T
+//        }else if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
+//            return RegisterViewModel(repository) as T
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
 }

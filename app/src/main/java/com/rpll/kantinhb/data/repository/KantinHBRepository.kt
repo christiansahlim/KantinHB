@@ -1,20 +1,30 @@
-package com.rpll.kantinhb.data
+package com.rpll.kantinhb.data.repository
 
-import com.rpll.kantinhb.data.source.DataSource
-import android.util.Log
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import com.rpll.kantinhb.model.Category
 import com.rpll.kantinhb.model.OrderItem
 import com.rpll.kantinhb.model.ProductItem
+import com.rpll.kantinhb.ui.common.UiState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
+import android.util.Log
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.setValue
+import com.rpll.kantinhb.data.source.DataSource
 
-class KantinHBRepository {
+class KantinHBRepository private constructor() {
     private val specialSelectionById: List<Long> = arrayListOf(
         4, 6, 8, 12, 16, 18, 21, 23, 25, 29, 30
     )
+
+    private var _isLoggedIn by mutableStateOf(false)
+    val isLoggedIn: Boolean get() = _isLoggedIn
+
+    private var _errorText by mutableStateOf<String?>(null)
+    val errorText: String? get() = _errorText
+
     private val promotions = mutableListOf<Int>()
     private val categories = mutableListOf<Category>()
     private val specialSelection = mutableStateListOf<ProductItem>()
@@ -37,10 +47,9 @@ class KantinHBRepository {
             }
         }
 
-
         if (specialSelection.isEmpty()) {
             DataSource.products().forEach {
-               if(it.id in specialSelectionById){
+                if (it.id in specialSelectionById) {
                     specialSelection.add(it)
                 }
             }
@@ -80,7 +89,7 @@ class KantinHBRepository {
     }
 
     fun getProductByCategoryId(categoryId: Int): Flow<List<ProductItem>> {
-        Log.e("Product By ID","CALLED IN HERE")
+        Log.e("Product By ID", "CALLED IN HERE")
         productsByCategoryId.clear()
         DataSource.products().filter {
             it.category_id == categoryId
@@ -88,7 +97,7 @@ class KantinHBRepository {
             productsByCategoryId.add(product)
         }
 
-       return flowOf(productsByCategoryId)
+        return flowOf(productsByCategoryId)
     }
 
     fun getProductFavorites(): Flow<List<ProductItem>> {
@@ -102,7 +111,7 @@ class KantinHBRepository {
         return flowOf(productsFavorites)
     }
 
-    fun addProductToCart(product: ProductItem, total: Int){
+    fun addProductToCart(product: ProductItem, total: Int) {
         orders.add(
             OrderItem(
                 item = product,
@@ -155,4 +164,31 @@ class KantinHBRepository {
                 }
             }
     }
+
+    // Fungsi untuk melakukan login
+//    fun Login(email: String, password: String): Flow<UiState<Boolean>> {
+//        return performLoginFunction (email, password) { result ->
+//            if (result is UiState.Success) {
+//                _isLoggedIn = true
+//            } else if (result is UiState.Error) {
+//                _errorText = "Login failed. ${result.errorMessage ?: "Unknown error"}"
+//            }
+//        }
+//    }
+//
+//    // Fungsi untuk melakukan registrasi
+//    fun Register(email: String, username: String, password: String): Flow<UiState<Boolean>> {
+//        return performRegisterFunction(email, username, password) { result ->
+//            if (result is UiState.Success) {
+//                performLoginFunction(email, password) { loginResult ->
+//                    if (loginResult is UiState.Error) {
+//                        _errorText = "Login failed. ${loginResult.errorMessage ?: "Unknown error"}"
+//                    }
+//                }
+//            } else if (result is UiState.Error) {
+//                _errorText = "Registration failed. ${result.errorMessage ?: "Unknown error"}"
+//            }
+//        }
+//    }
 }
+
