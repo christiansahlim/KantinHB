@@ -32,7 +32,7 @@ import com.rpll.kantinhb.model.OrderItem
 import com.rpll.kantinhb.navigation.KantinHBScreen
 import com.rpll.kantinhb.ui.ViewModelFactory
 import com.rpll.kantinhb.ui.screen.cart.CartViewModel
-import com.rpll.kantinhb.ui.theme.VividGreen_100
+import com.rpll.kantinhb.ui.theme.VividBlue_100
 import com.rpll.kantinhb.utils.Utils
 import kotlinx.coroutines.delay
 
@@ -89,7 +89,7 @@ fun ProductItem03(
                     style = TextStyle(
                         fontWeight = FontWeight.Bold,
                         fontSize = 16.sp,
-                        color = VividGreen_100
+                        color = VividBlue_100
                     ),
                 )
             }

@@ -26,7 +26,7 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.rpll.kantinhb.navigation.KantinHBScreen
-import com.rpll.kantinhb.ui.theme.VividGreen_100
+import com.rpll.kantinhb.ui.theme.VividBlue_100
 import kotlinx.coroutines.delay
 
 
@@ -64,7 +64,7 @@ fun SuccessAddToCart(
             text = if(isUpdate == true) { "Success Update Item in the Cart" } else { "Success Add Item to Cart" },
             style = TextStyle(
                 fontSize = 24.sp,
-                color = VividGreen_100,
+                color = VividBlue_100,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
             )

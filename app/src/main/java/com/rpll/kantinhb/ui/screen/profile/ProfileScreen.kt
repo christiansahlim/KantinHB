@@ -26,8 +26,8 @@ import com.rpll.kantinhb.di.Injection
 import com.rpll.kantinhb.navigation.KantinHBScreen
 import com.rpll.kantinhb.ui.ViewModelFactory
 import com.rpll.kantinhb.ui.common.UiState
-import com.rpll.kantinhb.ui.theme.VividGreen_100
-import com.rpll.kantinhb.ui.theme.VividGreen_500
+import com.rpll.kantinhb.ui.theme.VividBlue_100
+import com.rpll.kantinhb.ui.theme.VividBlue_500
 import com.rpll.kantinhb.R
 import com.rpll.kantinhb.ui.components.TitleSubtitle
 import com.rpll.kantinhb.ui.components.TopBackBar
@@ -202,7 +202,7 @@ private fun UserProfile() {
                 .padding(16.dp)
                 .size(80.dp)
                 .clip(CircleShape)                       // clip to the circle shape
-                .border(3.dp, VividGreen_500, CircleShape)
+                .border(3.dp, VividBlue_500, CircleShape)
         )
         Column(
             modifier = Modifier
@@ -213,7 +213,7 @@ private fun UserProfile() {
                 style = TextStyle(
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
-                    color = VividGreen_100
+                    color = VividBlue_100
                 )
             )
 

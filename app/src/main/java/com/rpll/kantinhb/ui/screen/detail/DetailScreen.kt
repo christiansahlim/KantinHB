@@ -39,8 +39,8 @@ import com.rpll.kantinhb.ui.common.UiState
 import com.rpll.kantinhb.ui.components.AddRemoveButton
 import com.rpll.kantinhb.ui.components.Title
 import com.rpll.kantinhb.ui.theme.Marigold_100
-import com.rpll.kantinhb.ui.theme.VividGreen_100
-import com.rpll.kantinhb.ui.theme.VividGreen_300
+import com.rpll.kantinhb.ui.theme.VividBlue_100
+import com.rpll.kantinhb.ui.theme.VividBlue_300
 import com.rpll.kantinhb.utils.Utils.toRupiah
 import com.rpll.kantinhb.R
 
@@ -177,7 +177,7 @@ private fun LandscapeVersion(
                 ) {
                     Text(
                         "Update Order",
-                        color = VividGreen_100
+                        color = VividBlue_100
                     )
                 }
             } else {
@@ -269,7 +269,7 @@ private fun PortraitVersion(
             ) {
                 Text(
                     "Update Order",
-                    color = VividGreen_100
+                    color = VividBlue_100
                 )
             }
         } else {
@@ -306,7 +306,7 @@ fun WebsiteSection(webUrl: String) {
         style = TextStyle(
             fontSize = 14.sp,
             textDecoration = TextDecoration.Underline,
-            color = VividGreen_300
+            color = VividBlue_300
         ),
         modifier = Modifier.clickable {
             uriHandler.openUri(webUrl)
@@ -422,7 +422,7 @@ private fun TopSection(
             toRupiah(product.price),
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
-                color = VividGreen_100,
+                color = VividBlue_100,
                 fontSize = 20.sp
             )
         )

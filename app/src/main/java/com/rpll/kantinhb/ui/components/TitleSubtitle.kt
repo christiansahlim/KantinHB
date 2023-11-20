@@ -10,7 +10,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.rpll.kantinhb.ui.theme.VividGreen_100
+import com.rpll.kantinhb.ui.theme.VividBlue_100
 
 @Composable
 fun TitleSubtitle(
@@ -42,7 +42,7 @@ fun Title(title: String, modifier: Modifier = Modifier.padding(start = 20.dp)) {
         style = TextStyle(
             fontWeight = FontWeight.Bold,
             fontSize = 18.sp,
-            color = VividGreen_100
+            color = VividBlue_100
         ),
         modifier = modifier
 

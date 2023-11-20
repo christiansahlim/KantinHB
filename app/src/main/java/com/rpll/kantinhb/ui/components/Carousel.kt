@@ -21,7 +21,7 @@ import com.google.accompanist.pager.PagerState
 import kotlinx.coroutines.delay
 import com.rpll.kantinhb.R
 import com.rpll.kantinhb.ui.theme.Marigold_100
-import com.rpll.kantinhb.ui.theme.VividGreen_300
+import com.rpll.kantinhb.ui.theme.VividBlue_300
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -108,7 +108,7 @@ fun DotsIndicator(
                     modifier = Modifier
                         .size(10.dp)
                         .clip(CircleShape)
-                        .background(color = VividGreen_300)
+                        .background(color = VividBlue_300)
                 )
             }
 

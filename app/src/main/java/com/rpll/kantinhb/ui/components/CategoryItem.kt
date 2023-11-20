@@ -18,7 +18,7 @@ import androidx.navigation.NavController
 import com.rpll.kantinhb.model.Category
 import com.rpll.kantinhb.navigation.KantinHBScreen
 import com.rpll.kantinhb.ui.theme.FloralWhite
-import com.rpll.kantinhb.ui.theme.VividGreen_500
+import com.rpll.kantinhb.ui.theme.VividBlue_500
 
 @Composable
 fun CategoryItem(
@@ -56,7 +56,7 @@ fun CategoryItem(
             text = category.name,
             style = TextStyle(
                 fontSize = 12.sp,
-                color = VividGreen_500,
+                color = VividBlue_500,
                 fontWeight = FontWeight.Bold
             )
         )

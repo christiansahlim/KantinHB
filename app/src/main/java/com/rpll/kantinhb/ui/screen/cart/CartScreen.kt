@@ -38,8 +38,8 @@ import com.rpll.kantinhb.ui.common.UiState
 import com.rpll.kantinhb.ui.components.CustomTopNavigationBar
 import com.rpll.kantinhb.ui.components.Loader
 import com.rpll.kantinhb.ui.components.ProductItem03
-import com.rpll.kantinhb.ui.theme.VividGreen_100
-import com.rpll.kantinhb.ui.theme.VividGreen_300
+import com.rpll.kantinhb.ui.theme.VividBlue_100
+import com.rpll.kantinhb.ui.theme.VividBlue_300
 import com.rpll.kantinhb.utils.Utils.toRupiah
 
 
@@ -137,7 +137,7 @@ private fun LandscapeVersion(
                                     style = TextStyle(
                                         fontSize = 24.sp,
                                         fontWeight = FontWeight.Bold,
-                                        color = VividGreen_100
+                                        color = VividBlue_100
                                     )
                                 )
 
@@ -272,7 +272,7 @@ private fun PortraitVersion(
                                 style = TextStyle(
                                     fontSize = 24.sp,
                                     fontWeight = FontWeight.Bold,
-                                    color = VividGreen_100
+                                    color = VividBlue_100
                                 )
                             )
 
@@ -322,7 +322,7 @@ private fun PaymentSummary(
                 style = TextStyle(
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
-                    color = VividGreen_300
+                    color = VividBlue_300
                 )
             )
 

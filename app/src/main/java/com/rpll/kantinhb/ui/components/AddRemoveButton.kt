@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rpll.kantinhb.ui.theme.Marigold_100
-import com.rpll.kantinhb.ui.theme.VividGreen_100
+import com.rpll.kantinhb.ui.theme.VividBlue_100
 
 @Composable
 fun AddRemoveButton(
@@ -52,7 +52,7 @@ fun AddRemoveButton(
                 modifier = Modifier
                     .size(35.dp),
                 shape = CircleShape,
-                backgroundColor = VividGreen_100
+                backgroundColor = VividBlue_100
             ) {
                 Box(
                     modifier = Modifier.size(15.dp)
@@ -86,7 +86,7 @@ fun AddRemoveButton(
                 modifier = Modifier
                     .size(35.dp),
                 shape = CircleShape,
-                backgroundColor = VividGreen_100
+                backgroundColor = VividBlue_100
             ) {
                 Box(
                     modifier = Modifier.size(15.dp)
@@ -126,7 +126,7 @@ fun AddRemoveButton(
                 modifier = Modifier
                     .size(35.dp),
                 shape = CircleShape,
-                backgroundColor = VividGreen_100
+                backgroundColor = VividBlue_100
             ) {
                 Box(
                     modifier = Modifier.size(15.dp)
@@ -162,7 +162,7 @@ fun AddRemoveButton(
                 modifier = Modifier
                     .size(35.dp),
                 shape = CircleShape,
-                backgroundColor = VividGreen_100
+                backgroundColor = VividBlue_100
             ) {
                 Box(
                     modifier = Modifier.size(15.dp)

@@ -33,7 +33,7 @@ import com.rpll.kantinhb.navigation.KantinHBScreen
 import com.rpll.kantinhb.ui.screen.home.HomeViewModel
 import com.rpll.kantinhb.R
 import com.rpll.kantinhb.ui.screen.my_favorite.MyFavoriteViewModel
-import com.rpll.kantinhb.ui.theme.VividGreen_100
+import com.rpll.kantinhb.ui.theme.VividBlue_100
 import com.rpll.kantinhb.utils.Utils.toRupiah
 
 @Composable
@@ -174,7 +174,7 @@ fun ProductItem01(
                 style = TextStyle(
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp,
-                    color = VividGreen_100
+                    color = VividBlue_100
                 ),
                 modifier = Modifier
                     .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
@@ -316,7 +316,7 @@ fun ProductItem01(
                 style = TextStyle(
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp,
-                    color = VividGreen_100
+                    color = VividBlue_100
                 ),
                 modifier = Modifier
                     .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
