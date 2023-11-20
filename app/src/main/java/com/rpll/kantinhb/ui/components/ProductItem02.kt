@@ -21,7 +21,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.rpll.kantinhb.model.ProductItem
 import com.rpll.kantinhb.navigation.KantinHBScreen
-import com.rpll.kantinhb.ui.theme.VividGreen_100
+import com.rpll.kantinhb.ui.theme.VividBlue_100
 import com.rpll.kantinhb.utils.Utils.toRupiah
 import com.rpll.kantinhb.R
 
@@ -75,7 +75,7 @@ fun ProductItem02(
                     style = TextStyle(
                         fontWeight = FontWeight.Bold,
                         fontSize = 14.sp,
-                        color = VividGreen_100
+                        color = VividBlue_100
                     ),
                 )
             }

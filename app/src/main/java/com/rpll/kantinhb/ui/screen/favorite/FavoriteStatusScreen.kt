@@ -15,7 +15,7 @@ import androidx.navigation.NavController
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.rpll.kantinhb.ui.theme.VividGreen_100
+import com.rpll.kantinhb.ui.theme.VividBlue_100
 import kotlinx.coroutines.delay
 import com.rpll.kantinhb.R
 
@@ -65,7 +65,7 @@ fun FavoriteStatus(
             text = desc,
             style = TextStyle(
                 fontSize = 24.sp,
-                color = VividGreen_100,
+                color = VividBlue_100,
                 fontWeight = FontWeight.Bold
             )
         )

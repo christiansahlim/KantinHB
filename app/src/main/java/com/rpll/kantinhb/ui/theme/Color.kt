@@ -2,15 +2,10 @@ package com.rpll.kantinhb.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val VividGreen_100 = Color(0, 140, 21)
-val VividGreen_200 = Color(0,126,18)
-val VividGreen_300 = Color(0,112,16)
-val VividGreen_400 = Color(0,98,14)
-val VividGreen_500 = Color(0,84,12)
-val VividGreen_600 = Color(0,70,10)
-val VividGreen_700 = Color(0,56,8)
-val VividGreen_800 = Color(0,42,6)
-val VividGreen_900 = Color(0,28,4)
+val VividBlue_100 = Color(12, 33, 193)
+val VividBlue_300 = Color(22,62,165)
+val VividBlue_500 = Color(4,48,80)
+val VividBlue_900 = Color(0,0,128)
 
 val Marigold_100 = Color(255, 198, 0)
 val Marigold_200 = Color(229,178,0)

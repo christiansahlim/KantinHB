@@ -30,7 +30,7 @@ import com.rpll.kantinhb.ui.common.UiState
 import com.rpll.kantinhb.ui.components.CustomTopNavigationBar
 import com.rpll.kantinhb.ui.components.Loader
 import com.rpll.kantinhb.ui.components.ProductItem01
-import com.rpll.kantinhb.ui.theme.VividGreen_100
+import com.rpll.kantinhb.ui.theme.VividBlue_100
 
 @Composable
 fun MyFavoriteScreen(
@@ -125,7 +125,7 @@ fun MyFavoriteScreen(
                                             style = TextStyle(
                                                 fontSize = 24.sp,
                                                 fontWeight = FontWeight.Bold,
-                                                color = VividGreen_100
+                                                color = VividBlue_100
                                             )
                                         )
                                     }

@@ -22,7 +22,7 @@ import com.rpll.kantinhb.di.Injection
 import com.rpll.kantinhb.ui.ViewModelFactory
 import com.rpll.kantinhb.ui.common.UiState
 import com.rpll.kantinhb.ui.components.*
-import com.rpll.kantinhb.ui.theme.VividGreen_100
+import com.rpll.kantinhb.ui.theme.VividBlue_100
 
 @Composable
 fun CategoryScreen(
@@ -98,11 +98,11 @@ private fun LandscapeVersion(
                                         },
                                         border = BorderStroke(
                                             ChipDefaults.OutlinedBorderSize,
-                                            VividGreen_100
+                                            VividBlue_100
                                         ),
                                         colors = ChipDefaults.chipColors(
                                             backgroundColor = Color.White,
-                                            contentColor = VividGreen_100
+                                            contentColor = VividBlue_100
                                         )
                                     ) {
                                         Text(category.name)
@@ -115,7 +115,7 @@ private fun LandscapeVersion(
                                             Log.e("CLICKED", "CHIP CLICKED: ${category.name}")
                                         },
                                         colors = ChipDefaults.chipColors(
-                                            backgroundColor = VividGreen_100,
+                                            backgroundColor = VividBlue_100,
                                             contentColor = Color.White
                                         )
                                     ) {
@@ -191,11 +191,11 @@ private fun PortraitVersion(
                                     },
                                     border = BorderStroke(
                                         ChipDefaults.OutlinedBorderSize,
-                                        VividGreen_100
+                                        VividBlue_100
                                     ),
                                     colors = ChipDefaults.chipColors(
                                         backgroundColor = Color.White,
-                                        contentColor = VividGreen_100
+                                        contentColor = VividBlue_100
                                     )
                                 ) {
                                     Text(category.name)
@@ -207,7 +207,7 @@ private fun PortraitVersion(
                                         selectedCategoryState.value = category.id
                                     },
                                     colors = ChipDefaults.chipColors(
-                                        backgroundColor = VividGreen_100,
+                                        backgroundColor = VividBlue_100,
                                         contentColor = Color.White
                                     )
                                 ) {
