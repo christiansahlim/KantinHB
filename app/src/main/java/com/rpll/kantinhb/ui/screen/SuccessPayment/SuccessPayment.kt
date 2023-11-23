@@ -1,9 +1,8 @@
-package com.rpll.kantinhb.ui.screen.successAddToCart
+package com.rpll.kantinhb.ui.screen.SuccessPayment
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.R
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,19 +24,18 @@ import androidx.navigation.NavController
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.rpll.kantinhb.R
 import com.rpll.kantinhb.navigation.KantinHBScreen
 import com.rpll.kantinhb.ui.theme.VividBlue_100
 import kotlinx.coroutines.delay
 
-
 @Composable
-fun SuccessAddToCart(
+fun SuccessPayment(
     navController: NavController,
-    isUpdate: Boolean? = null
 ){
 
     LaunchedEffect(Unit) {
-        delay(1500L)
+        delay(1000L)
         navController.navigate(KantinHBScreen.HomeScreen.route)
         navController.currentBackStackEntry?.arguments?.putBoolean("addedNewItem",true)
     }
@@ -49,7 +47,7 @@ fun SuccessAddToCart(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(com.rpll.kantinhb.R.raw.add_to_cart_blue))
+        val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.payment_success_blue))
         Box(modifier = Modifier.size(200.dp)){
             LottieAnimation(
                 composition = composition,
@@ -61,7 +59,7 @@ fun SuccessAddToCart(
         Spacer(modifier = Modifier.height(50.dp))
 
         Text(
-            text = if(isUpdate == true) { "Success Update Item in the Cart" } else { "Success Add Item to Cart" },
+            text =  "Payment Success",
             style = TextStyle(
                 fontSize = 24.sp,
                 color = VividBlue_100,

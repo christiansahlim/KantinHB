@@ -10,6 +10,7 @@ import com.rpll.kantinhb.ui.screen.category.CategoryViewModel
 import com.rpll.kantinhb.ui.screen.detail.DetailViewModel
 import com.rpll.kantinhb.ui.screen.home.HomeViewModel
 import com.rpll.kantinhb.ui.screen.my_favorite.MyFavoriteViewModel
+import com.rpll.kantinhb.ui.screen.payment.PaymentViewModel
 import com.rpll.kantinhb.ui.screen.profile.ProfileViewModel
 
 class ViewModelFactory(private val repository: KantinHBRepository) :
@@ -23,6 +24,8 @@ class ViewModelFactory(private val repository: KantinHBRepository) :
             return CategoryViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(CartViewModel::class.java)) {
             return CartViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(PaymentViewModel::class.java)) {
+            return PaymentViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
             return DetailViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {

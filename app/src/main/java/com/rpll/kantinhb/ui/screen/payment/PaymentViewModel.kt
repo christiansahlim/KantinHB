@@ -1,4 +1,4 @@
-package com.rpll.kantinhb.ui.screen.cart
+package com.rpll.kantinhb.ui.screen.payment
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -9,31 +9,33 @@ import com.rpll.kantinhb.ui.common.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class CartViewModel(
-    private val repository: KantinHBRepository
-) : ViewModel() {
-
-    private val _productUiState: MutableStateFlow<UiState<List<OrderItem>>> =
-        MutableStateFlow(UiState.Loading)
+class PaymentViewModel(
+private val repository: KantinHBRepository
+): ViewModel() {
+    private val _productUiState: MutableStateFlow<UiState<List<OrderItem>>> = MutableStateFlow(
+        UiState.Loading
+    )
     val productUiState: StateFlow<UiState<List<OrderItem>>>
         get() = _productUiState
 
-    private val _updateUiState: MutableStateFlow<UiState<Boolean>> =
-        MutableStateFlow(UiState.Loading)
+    private val _updateUiState: MutableStateFlow<UiState<Boolean>> = MutableStateFlow(
+        UiState.Loading
+    )
     val updateUiState: StateFlow<UiState<Boolean>>
         get() = _updateUiState
 
-    private val _removeUiState: MutableStateFlow<UiState<Boolean>> =
-        MutableStateFlow(UiState.Loading)
+    private val _removeUiState: MutableStateFlow<UiState<Boolean>> = MutableStateFlow(
+        UiState.Loading
+    )
     val removeUiState: StateFlow<UiState<Boolean>>
         get() = _removeUiState
 
     val totalPriceInCart = mutableStateOf(0.0)
 
-    fun getProductsInCart() {
+
+    fun getProductsInPayment() {
         viewModelScope.launch {
             repository.getAllProductInCart()
                 .catch {
@@ -48,33 +50,49 @@ class CartViewModel(
         }
     }
 
-    fun updateProductInCart(productId: Long, total: Int) {
+    fun updateProductInPayment(productId: Long, total: Int) {
         viewModelScope.launch {
             repository.updateProductInCart(productId = productId, total = total)
                 .catch {
                     _updateUiState.value = UiState.Error(it.message.toString())
                 }
                 .collect { items ->
-                    // Update the latest total price in cart
+                    //Update the latest total price in cart
                     totalPriceInCart.value = 0.0
-                    getProductsInCart()
+                    getProductsInPayment()
 
                     _updateUiState.value = UiState.Success(items)
                 }
         }
     }
 
-    fun removeProductInCart(productId: Long) {
+    fun removeProductInPayment(productId: Long) {
         viewModelScope.launch {
             repository.removeProductFromCart(productId = productId)
                 .catch {
                     _removeUiState.value = UiState.Error(it.message.toString())
                 }
                 .collect { items ->
-                    // Update the latest total price in cart
+                    //Update the latest total price in cart
                     totalPriceInCart.value = 0.0
-                    getProductsInCart()
+                    getProductsInPayment()
 
+                    _removeUiState.value = UiState.Success(items)
+                }
+        }
+    }
+
+    fun removeAllProductsFromCart() {
+        viewModelScope.launch {
+            repository.removeAllProductsFromCart()
+                .catch {
+                    _removeUiState.value = UiState.Error(it.message.toString())
+                }
+                .collect { items ->
+                    // Set total price to 0 because all products are removed
+                    totalPriceInCart.value = 0.0
+
+                    // Update UI State after removing all products
                     _removeUiState.value = UiState.Success(items)
                 }
         }
