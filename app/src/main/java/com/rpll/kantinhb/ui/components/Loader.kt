@@ -14,7 +14,7 @@ import com.rpll.kantinhb.R
 
 @Composable
 fun Loader(modifier: Modifier = Modifier) {
-    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.loading_green))
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.loader_blue))
     Box(modifier = Modifier.fillMaxWidth()){
         LottieAnimation(
             composition = composition,

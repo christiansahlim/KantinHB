@@ -147,6 +147,11 @@ class KantinHBRepository private constructor() {
         return flowOf(orders)
     }
 
+    fun removeAllProductsFromCart(): Flow<Boolean> {
+        orders.clear()
+        return flowOf(true)
+    }
+
     fun getOrderById(productId: Long): List<OrderItem> {
         return orders.filter {
             it.item.id == productId
