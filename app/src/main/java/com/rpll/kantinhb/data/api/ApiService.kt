@@ -64,7 +64,7 @@ interface ApiService {
     @GET("/user")
     suspend fun getUser(
         @Header("Cookie") token: String,
-        @Part("id") id: RequestBody
+        @Query("id") id: Int
     ): Response<UserResponse>
 
     @PUT("/user")
@@ -92,7 +92,7 @@ interface ApiService {
     @GET("/item")
     suspend fun getItem(
         @Header("Cookie") token: String,
-        @Part("id") id: RequestBody
+        @Query("id") id: Int
     ): Response<ItemResponse>
 
     @POST("/item")
@@ -134,7 +134,7 @@ interface ApiService {
     @GET("/transaction")
     suspend fun getTransaction(
         @Header("Cookie") token: String,
-        @Part("id") id: RequestBody
+        @Query("id") id: Int
     ): Response<TransactionResponse>
 
     @PUT("/transaction")
@@ -160,7 +160,7 @@ interface ApiService {
     @GET("/cart/item")
     suspend fun getItemFromCart(
         @Header("Cookie") token: String,
-        @Part("id") id: RequestBody
+        @Query("id") id: Int
     ): Response<CartResponse>
 
     @POST("/cart/item")
