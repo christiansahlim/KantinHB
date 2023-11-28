@@ -1,5 +1,27 @@
 package com.rpll.kantinhb.data.api
 
+import com.rpll.kantinhb.data.request.LoginRequest
+import com.rpll.kantinhb.data.response.AddItemResponse
+import com.rpll.kantinhb.data.response.AddtoCartResponse
+import com.rpll.kantinhb.data.response.CartResponse
+import com.rpll.kantinhb.data.response.CheckoutResponse
+import com.rpll.kantinhb.data.response.DeleteCartResponse
+import com.rpll.kantinhb.data.response.DeleteItemResponse
+import com.rpll.kantinhb.data.response.DeleteTransactionResponse
+import com.rpll.kantinhb.data.response.DeleteUserResponse
+import com.rpll.kantinhb.data.response.ItemResponse
+import com.rpll.kantinhb.data.response.ItemsResponse
+import com.rpll.kantinhb.data.response.LoginResponse
+import com.rpll.kantinhb.data.response.LogoutResponse
+import com.rpll.kantinhb.data.response.RegisterResponse
+import com.rpll.kantinhb.data.response.TransactionResponse
+import com.rpll.kantinhb.data.response.TransactionsResponse
+import com.rpll.kantinhb.data.response.UpdateCartResponse
+import com.rpll.kantinhb.data.response.UpdateItemResponse
+import com.rpll.kantinhb.data.response.UpdateTransactionResponse
+import com.rpll.kantinhb.data.response.UpdateUserResponse
+import com.rpll.kantinhb.data.response.UserResponse
+import com.rpll.kantinhb.data.response.UsersResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -35,19 +57,10 @@ interface ApiService {
 
     // User Endpoint
     @GET("/users")
-    suspend fun getUsers(): Response<UserResponse>
+    suspend fun getUsers(): Response<UsersResponse>
 
     @GET("/user")
     suspend fun getUser(): Response<UserResponse>
-
-    @POST("/user")
-    @Multipart
-    suspend fun addUser(
-        @Part profile_picture: MultipartBody.Part? = null,
-        @Part("email") username: RequestBody,
-        @Part("password") password: RequestBody,
-        @Part("name") name: RequestBody
-    ): Response<UserResponse>
 
     @PUT("/user")
     @Multipart
@@ -56,17 +69,17 @@ interface ApiService {
         @Part("email") username: RequestBody,
         @Part("password") password: RequestBody,
         @Part("name") name: RequestBody
-    ): Response<UserResponse>
+    ): Response<UpdateUserResponse>
 
     @PUT("/user/edit")
-    suspend fun updateUserEdit(): Response<UserResponse>
+    suspend fun updateUserEdit(): Response<UpdateUserResponse>
 
     @DELETE("/user")
-    suspend fun deleteUser(): Response<UserResponse>
+    suspend fun deleteUser(): Response<DeleteUserResponse>
 
     // Item Endpoint
     @GET("/items")
-    suspend fun getItems(): Response<ItemResponse>
+    suspend fun getItems(): Response<ItemsResponse>
 
     @GET("/item")
     suspend fun getItem(): Response<ItemResponse>
@@ -76,49 +89,49 @@ interface ApiService {
     suspend fun addItem(
         @Part itemDetails: MultipartBody.Part? = null,
         // Additional item details if needed
-    ): Response<ItemResponse>
+    ): Response<AddItemResponse>
 
     @PUT("/item")
     @Multipart
     suspend fun updateItem(
         @Part itemDetails: MultipartBody.Part? = null,
         // Additional item details if needed
-    ): Response<ItemResponse>
+    ): Response<UpdateItemResponse>
 
     @DELETE("/item")
-    suspend fun deleteItem(): Response<ItemResponse>
+    suspend fun deleteItem(): Response<DeleteItemResponse>
 
     // Transaction Endpoint
     @GET("/transactions/user")
     suspend fun getTransactionsUser(): Response<TransactionResponse>
 
     @GET("/transactions")
-    suspend fun getTransactions(): Response<TransactionResponse>
+    suspend fun getTransactions(): Response<TransactionsResponse>
 
     @GET("/transaction")
     suspend fun getTransaction(): Response<TransactionResponse>
 
     @PUT("/transaction")
-    suspend fun updateTransaction(): Response<TransactionResponse>
+    suspend fun updateTransaction(): Response<UpdateTransactionResponse>
 
     @DELETE("/transaction")
-    suspend fun deleteTransaction(): Response<TransactionResponse>
+    suspend fun deleteTransaction(): Response<DeleteTransactionResponse>
 
     // Cart Endpoint
     @GET("/cart/items")
-    suspend fun getItemsFromCart(): Response<CartItemsResponse>
+    suspend fun getItemsFromCart(): Response<CartResponse>
 
     @GET("/cart/item")
-    suspend fun getItemFromCart(): Response<CartItemResponse>
+    suspend fun getItemFromCart(): Response<CartResponse>
 
     @POST("/cart/item")
-    suspend fun addItemToCart(): Response<CartItemResponse>
+    suspend fun addItemToCart(): Response<AddtoCartResponse>
 
     @PUT("/cart/item")
-    suspend fun updateCartItem(): Response<CartItemResponse>
+    suspend fun updateCartItem(): Response<UpdateCartResponse>
 
     @DELETE("/cart/item")
-    suspend fun deleteCartItem(): Response<CartItemResponse>
+    suspend fun deleteCartItem(): Response<DeleteCartResponse>
 
     @POST("/cart/checkout")
     suspend fun checkoutCart(): Response<CheckoutResponse>
