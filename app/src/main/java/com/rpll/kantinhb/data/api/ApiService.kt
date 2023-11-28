@@ -1,6 +1,5 @@
 package com.rpll.kantinhb.data.api
 
-import com.rpll.kantinhb.data.request.LoginRequest
 import com.rpll.kantinhb.data.response.AddItemResponse
 import com.rpll.kantinhb.data.response.AddtoCartResponse
 import com.rpll.kantinhb.data.response.CartResponse
