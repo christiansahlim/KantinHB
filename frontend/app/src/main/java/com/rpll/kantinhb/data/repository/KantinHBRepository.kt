@@ -178,9 +178,6 @@ class KantinHBRepository private constructor() {
 
     suspend fun Login(email: String, password: String): Result<LoginResponse> {
         return try {
-            Log.d("TEST TAG", email)
-            Log.d("TEST TAG", password)
-
             val response = ApiConfig().getApiService().loginUser(email, password);
             if (response.isSuccessful) {
                 val responseBody = response.body()

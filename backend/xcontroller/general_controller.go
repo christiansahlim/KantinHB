@@ -9,7 +9,7 @@ import (
 	"github.com/go-redis/redis/v8"
 	"net/http"
 	"time"
-	"log"
+	//"log"
 )
 
 // UserRegister Register
@@ -60,8 +60,8 @@ func UserLogin(w http.ResponseWriter, r *http.Request) {
 	email := r.Form.Get("email")
 	password := r.Form.Get("password")
 
-	log.Println("Email    : " + email)
-	log.Println("Password : " + password)
+	// log.Println("Email    : " + email)
+	// log.Println("Password : " + password)
 
 	row := db.QueryRow("SELECT * FROM users WHERE email = ? AND password = ?", email, password)
 
