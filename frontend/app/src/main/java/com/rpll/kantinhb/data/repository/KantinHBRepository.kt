@@ -12,7 +12,13 @@ import kotlinx.coroutines.flow.flowOf
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.setValue
+import com.rpll.kantinhb.data.api.ApiConfig
+import com.rpll.kantinhb.data.response.LoginResponse
 import com.rpll.kantinhb.data.source.DataSource
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 
 class KantinHBRepository private constructor() {
     private val specialSelectionById: List<Long> = arrayListOf(
@@ -168,6 +174,30 @@ class KantinHBRepository private constructor() {
                     instance = this
                 }
             }
+    }
+
+    suspend fun Login(email: String, password: String): Result<LoginResponse> {
+        return try {
+            Log.d("TEST TAG", email)
+            Log.d("TEST TAG", password)
+
+            val jsonObject = JSONObject()
+            jsonObject.put("email", email)
+            jsonObject.put("password", password)
+
+            val jsonObjectString = jsonObject.toString()
+            val requestBody = jsonObjectString.toRequestBody("application/x-www-form-urlencoded".toMediaTypeOrNull())
+
+            val response = ApiConfig().getApiService().loginUser(requestBody);
+            if (response.isSuccessful) {
+                val responseBody = response.body()
+                Result.success(responseBody!!)
+            } else {
+                Result.failure(Exception(response.errorBody()?.string() ?: "Unknown error"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
     // Fungsi untuk melakukan login

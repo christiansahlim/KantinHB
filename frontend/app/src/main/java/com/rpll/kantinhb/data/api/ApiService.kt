@@ -46,10 +46,9 @@ interface ApiService {
     ): Response<RegisterResponse>
 
     @POST("/login")
-    fun loginUser(
-        @Part("email") email: RequestBody,
-        @Part("password") password: RequestBody
-    ): Call<LoginResponse>
+    suspend fun loginUser(
+        @Body requestBody: RequestBody
+    ): Response<LoginResponse>
 
     @POST("/logout")
     fun logout(): Call<LogoutResponse>

@@ -250,7 +250,13 @@ fun LoginScreen(
 
         Button(
             onClick = {
-                navController.navigate(KantinHBScreen.HomeScreen.route)
+                //navController.navigate(KantinHBScreen.HomeScreen.route)
+                viewModel.performLogin(
+                    emailValue.value.text,
+                    passwordValue.value.text)
+                if (viewModel.isLoggedIn) {
+                    navController.navigate(KantinHBScreen.HomeScreen.route)
+                }
             },
             modifier = Modifier
                 .padding(top = 24.dp)

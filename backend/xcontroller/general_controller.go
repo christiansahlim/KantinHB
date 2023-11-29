@@ -4,10 +4,12 @@ import (
 	"KantinHB/xhandler"
 	"KantinHB/xmodel"
 	"KantinHB/xresponse"
+	"encoding/json"
 	"context"
 	"github.com/go-redis/redis/v8"
 	"net/http"
 	"time"
+	"log"
 )
 
 // UserRegister Register
@@ -58,6 +60,9 @@ func UserLogin(w http.ResponseWriter, r *http.Request) {
 	email := r.Form.Get("email")
 	password := r.Form.Get("password")
 
+	log.Println("Email    : " + email)
+	log.Println("Password : " + password)
+
 	row := db.QueryRow("SELECT * FROM users WHERE email = ? AND password = ?", email, password)
 
 	var user xmodel.User
@@ -74,7 +79,12 @@ func UserLogin(w http.ResponseWriter, r *http.Request) {
 			StartScheduler(user)
 		}
 
-		xresponse.PrintSuccess(200, "Logged In as "+level, w)
+		var response xmodel.LoginResponse
+		response.Status = http.StatusOK
+		response.Message = "Logged In as " + level
+		response.Data = user
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(response)
 	}
 }
 

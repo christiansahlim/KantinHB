@@ -22,20 +22,21 @@ class LoginViewModel(private val repository: KantinHBRepository) : ViewModel() {
     // Fungsi untuk melakukan login
     fun performLogin(email: String, password: String) {
         viewModelScope.launch {
-//            try {
-//                val result = repository.login(email, password)
-//
-//                if (result is UiState.Success) {
-//                    // Login berhasil
-//                    _isLoggedIn = true
-//                } else if (result is UiState.Error) {
-//                    // Login gagal, atur pesan kesalahan
-//                    _errorText = "Login failed. ${result.errorMessage ?: "Unknown error"}"
-//                }
-//            } catch (e: Exception) {
-//                // Tangani exception jika terjadi kesalahan selama proses login
-//                _errorText = "An unexpected error occurred."
-//            }
+            try {
+                val result = repository.Login(email, password).getOrNull()
+
+                if (result != null) {
+                    if (result.status == 200) {
+                        _isLoggedIn = true
+                    }
+                } else {
+                    // Login gagal, atur pesan kesalahan
+                    _errorText = "Login failed Unknown error"
+                }
+            } catch (e: Exception) {
+                // Tangani exception jika terjadi kesalahan selama proses login
+                _errorText = "An unexpected error occurred."
+            }
         }
     }
 }
