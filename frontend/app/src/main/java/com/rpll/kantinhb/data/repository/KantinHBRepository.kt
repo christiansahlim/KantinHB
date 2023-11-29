@@ -181,14 +181,7 @@ class KantinHBRepository private constructor() {
             Log.d("TEST TAG", email)
             Log.d("TEST TAG", password)
 
-            val jsonObject = JSONObject()
-            jsonObject.put("email", email)
-            jsonObject.put("password", password)
-
-            val jsonObjectString = jsonObject.toString()
-            val requestBody = jsonObjectString.toRequestBody("application/x-www-form-urlencoded".toMediaTypeOrNull())
-
-            val response = ApiConfig().getApiService().loginUser(requestBody);
+            val response = ApiConfig().getApiService().loginUser(email, password);
             if (response.isSuccessful) {
                 val responseBody = response.body()
                 Result.success(responseBody!!)
