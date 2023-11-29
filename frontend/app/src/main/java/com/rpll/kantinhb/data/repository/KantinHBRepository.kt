@@ -15,6 +15,10 @@ import com.rpll.kantinhb.model.OrderItem
 import com.rpll.kantinhb.model.ProductItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 import kotlinx.coroutines.runBlocking
 
 class KantinHBRepository private constructor() {
@@ -295,10 +299,9 @@ class KantinHBRepository private constructor() {
         }
     }
 
-    // done
-    suspend fun Register(email: String, name:String,password: String): Result<RegisterResponse> {
+    suspend fun Register(name:String, email: String,password: String): Result<RegisterResponse> {
         return try {
-            val response = ApiConfig().getApiService().registerUser(email, name, password);
+            val response = ApiConfig().getApiService().registerUser(name, email, password);
             if (response.isSuccessful) {
                 val responseBody = response.body()
                 Result.success(responseBody!!)

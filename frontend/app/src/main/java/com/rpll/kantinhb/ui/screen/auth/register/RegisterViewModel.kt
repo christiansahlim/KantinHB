@@ -24,15 +24,15 @@ class RegisterViewModel(private val repository: KantinHBRepository) : ViewModel(
 
     // Fungsi untuk melakukan login
     fun performRegister(
-        email: String,
         name: String,
+        email: String,
         password: String,
         navController: NavController
     ) {
         _isLoading = true;
         viewModelScope.launch {
             try {
-                val result = repository.Register(email, name, password).getOrNull()
+                val result = repository.Register(name, email, password).getOrNull()
                 if (result != null) {
                     if (result.status == 200) {
                         navController.navigate(KantinHBScreen.LoginScreen.route)
