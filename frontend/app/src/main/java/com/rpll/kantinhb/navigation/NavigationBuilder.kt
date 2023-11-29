@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.rpll.kantinhb.model.OrderItem
 import com.rpll.kantinhb.model.ProductItem
 import com.rpll.kantinhb.ui.screen.SuccessPayment.SuccessPayment
 import com.rpll.kantinhb.ui.screen.cart.CartScreen
@@ -16,11 +15,19 @@ import com.rpll.kantinhb.ui.screen.my_favorite.MyFavoriteScreen
 import com.rpll.kantinhb.ui.screen.payment.PaymentScreen
 import com.rpll.kantinhb.ui.screen.profile.ProfileScreen
 import com.rpll.kantinhb.ui.screen.successAddToCart.SuccessAddToCart
+import com.rpll.kantinhb.ui.screen.auth.login.LoginScreen
+import com.rpll.kantinhb.ui.screen.auth.register.RegisterScreen
 
 @Composable
 fun NavigationBuilder() {
     val navigationController = rememberNavController()
-    NavHost(navController = navigationController, startDestination = KantinHBScreen.HomeScreen.route){
+    NavHost(navController = navigationController, startDestination = KantinHBScreen.LoginScreen.route){
+        composable(route = KantinHBScreen.LoginScreen.route){
+            LoginScreen(navController = navigationController)
+        }
+        composable(route = KantinHBScreen.RegisterScreen.route){
+            RegisterScreen(navController = navigationController)
+        }
         composable(route = KantinHBScreen.HomeScreen.route){ previousBackStackEntry ->
             val addedNewItem = previousBackStackEntry.arguments?.getBoolean("addedNewItem")
             if (addedNewItem != null){

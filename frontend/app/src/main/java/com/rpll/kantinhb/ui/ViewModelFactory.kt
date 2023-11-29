@@ -33,10 +33,11 @@ class ViewModelFactory(private val repository: KantinHBRepository) :
         } else if (modelClass.isAssignableFrom(MyFavoriteViewModel::class.java)) {
             return MyFavoriteViewModel(repository) as T
         }
-//        else if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-//            return LoginViewModel(repository) as T
-//        }else if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
-//            return RegisterViewModel(repository) as T
+        else if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
+            return LoginViewModel(repository) as T
+        }else if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
+            return RegisterViewModel(repository) as T
+        }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
 }
