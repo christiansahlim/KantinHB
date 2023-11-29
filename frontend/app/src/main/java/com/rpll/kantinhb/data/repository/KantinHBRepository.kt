@@ -191,9 +191,9 @@ class KantinHBRepository private constructor() {
         }
     }
 
-    suspend fun Register(email: String, name:String,password: String): Result<RegisterResponse> {
+    suspend fun Register(name:String, email: String,password: String): Result<RegisterResponse> {
         return try {
-            val response = ApiConfig().getApiService().registerUser(email, name, password);
+            val response = ApiConfig().getApiService().registerUser(name, email, password);
             if (response.isSuccessful) {
                 val responseBody = response.body()
                 Result.success(responseBody!!)
