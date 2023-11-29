@@ -39,6 +39,7 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.rpll.kantinhb.data.repository.KantinHBRepository
 import com.rpll.kantinhb.di.Injection
+import com.rpll.kantinhb.navigation.KantinHBScreen
 import com.rpll.kantinhb.ui.ViewModelFactory
 import com.rpll.kantinhb.utils.BackPress
 import kotlinx.coroutines.delay
@@ -132,7 +133,7 @@ fun LoginScreen(
         ClickableText(
             text = registerText,
             onClick = {
-//                navigationController.navigate("registerScreen")
+                navController.navigate(KantinHBScreen.RegisterScreen.route)
             },
             style = TextStyle(fontSize = 20.sp),
             modifier = Modifier.padding(bottom = 24.dp)
@@ -249,7 +250,7 @@ fun LoginScreen(
 
         Button(
             onClick = {
-                // Handle login button click
+                navController.navigate(KantinHBScreen.HomeScreen.route)
             },
             modifier = Modifier
                 .padding(top = 24.dp)
