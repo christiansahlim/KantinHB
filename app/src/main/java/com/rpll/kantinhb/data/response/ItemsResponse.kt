@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class ItemsResponse(
 
 	@field:SerializedName("data")
-	val data: List<DataItem>,
+	val data: List<DataItems>,
 
 	@field:SerializedName("message")
 	val message: String,
@@ -14,7 +14,7 @@ data class ItemsResponse(
 	val status: Int
 )
 
-data class DataItem(
+data class DataItems(
 
 	@field:SerializedName("price")
 	val price: Int,

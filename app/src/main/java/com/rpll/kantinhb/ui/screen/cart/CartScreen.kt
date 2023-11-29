@@ -255,7 +255,7 @@ private fun PortraitVersion(
                             shape = RoundedCornerShape(50)
                         ) {
                             Text(
-                                "Place to Order"
+                                "Checkout"
                             )
                         }
                     } else {

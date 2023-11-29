@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class CheckoutResponse(
 
 	@field:SerializedName("data")
-	val data: Data,
+	val data: CheckoutData,
 
 	@field:SerializedName("message")
 	val message: String,
@@ -14,7 +14,7 @@ data class CheckoutResponse(
 	val status: Int
 )
 
-data class Data(
+data class CheckoutData(
 
 	@field:SerializedName("datetime")
 	val datetime: String,
@@ -26,25 +26,25 @@ data class Data(
 	val id: Int,
 
 	@field:SerializedName("user")
-	val user: User,
+	val user: UserData,
 
 	@field:SerializedName("items")
-	val items: List<ItemsItem>,
+	val items: List<ItemCheckout>,
 
 	@field:SerializedName("status")
 	val status: String
 )
 
-data class ItemsItem(
+data class ItemCheckout(
 
 	@field:SerializedName("item")
-	val item: Item,
+	val item: CheckoutItem,
 
 	@field:SerializedName("quantity")
 	val quantity: Int
 )
 
-data class User(
+data class UserData(
 
 	@field:SerializedName("name")
 	val name: String,
@@ -59,7 +59,7 @@ data class User(
 	val email: String
 )
 
-data class Item(
+data class CheckoutItem(
 
 	@field:SerializedName("price")
 	val price: Int,
