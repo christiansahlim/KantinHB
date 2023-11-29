@@ -60,6 +60,13 @@ func main() {
 	router.HandleFunc("/cart/item", xhandler.Authenticate(c.DeleteCartItem, false)).Methods("DELETE")
 	router.HandleFunc("/cart/checkout", xhandler.Authenticate(c.CheckoutCart, false)).Methods("POST")
 
+	// Category Endpoint
+	router.HandleFunc("/categories", c.GetCategories).Methods("GET")
+	router.HandleFunc("/category", c.GetCategory).Methods("GET")
+	router.HandleFunc("/category", c.AddCategory).Methods("POST")
+	router.HandleFunc("/category", c.UpdateCategory).Methods("PUT")
+	router.HandleFunc("/category", c.DeleteCategory).Methods("DELETE")
+
 	// CORS
 	corsHandler := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},

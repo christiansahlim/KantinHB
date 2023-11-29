@@ -34,6 +34,18 @@ type ItemsResponse struct {
 	Data    []Item `json:"data"`
 }
 
+type CategoriesResponse struct {
+	Status  int       `json:"status"`
+	Message string    `json:"message"`
+	Data    []Category `json:"data"`
+}
+
+type CategoryResponse struct {
+	Status  int      `json:"status"`
+	Message string   `json:"message"`
+	Data    Category `json:"data"`
+}
+
 type CartResponse struct {
 	Status  int            `json:"status"`
 	Message string         `json:"message"`
