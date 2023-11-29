@@ -758,6 +758,165 @@
 					"response": []
 				}
 			]
-		}
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/categories",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "",
+									"value": "",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8081/category?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"category"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "name",
+									"value": "Pastry",
+									"type": "default"
+								},
+								{
+									"key": "image",
+									"value": "https://static.thenounproject.com/png/3200624-200.png",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8081/category",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Pastry",
+									"type": "default"
+								},
+								{
+									"key": "image",
+									"value": "https://static.thenounproject.com/png/3200624-200.png",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8081/category",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:8081/category?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"category"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}		
 	]
 }
