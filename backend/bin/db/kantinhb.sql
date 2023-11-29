@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2023 at 01:50 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Nov 29, 2023 at 05:05 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `carts` (
   `id_user` int(11) NOT NULL,
   `id_item` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `carts`
@@ -43,6 +43,26 @@ INSERT INTO `carts` (`id_user`, `id_item`, `quantity`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `image` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `image`) VALUES
+(1, 'Food', 'https://static.thenounproject.com/png/1633691-200.png'),
+(2, 'Drink', 'https://static.thenounproject.com/png/2578-200.png');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `detailed_transactions`
 --
 
@@ -50,7 +70,7 @@ CREATE TABLE `detailed_transactions` (
   `id_transaction` int(11) NOT NULL,
   `id_item` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `detailed_transactions`
@@ -86,21 +106,23 @@ CREATE TABLE `items` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `price` int(11) NOT NULL,
-  `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `description` text NOT NULL,
+  `image` text NOT NULL,
+  `id_category` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`id`, `name`, `price`, `description`) VALUES
-(1, 'Nasi Bakar', 15000, 'Nasi yang diolah dengan bumbu-bumbu yang khas Indonesia.'),
-(2, 'Sate Ayam', 20000, 'Daging ayam yang dipotong kecil-kecil kemudian ditusuk dengan bambu.'),
-(3, 'Mie Ayam', 12000, 'Mie dengan potongan ayam dan sayuran.'),
-(4, 'Nasi Uduk', 10000, 'Nasi yang dimasak dengan santan dan rempah-rempah.'),
-(5, 'Ayam Goreng', 15000, 'Potongan ayam yang digoreng hingga renyah.'),
-(6, 'Teh Manis', 5000, 'Minuman teh yang diberi gula.'),
-(7, 'Es Jeruk', 10000, 'Minuman segar yang terbuat dari jeruk yang dicampur dengan es.');
+INSERT INTO `items` (`id`, `name`, `price`, `description`, `image`, `id_category`) VALUES
+(1, 'Nasi Rempah', 15000, 'Nasi yang diolah dengan bumbu-bumbu yang khas Indonesia.', 'https://dcostseafood.id/wp-content/uploads/2023/11/Nasi-Goreng-Hejo.jpg', 1),
+(2, 'Ayam Mentega', 20000, 'Daging ayam yang dipotong kecil-kecil kemudian dimasak dengan bambu.', 'https://dcostseafood.id/wp-content/uploads/2021/12/Ayam-Goreng-Mentega.jpg', 1),
+(3, 'Mie Ayam', 12000, 'Mie dengan potongan ayam dan sayuran.', 'https://dcostseafood.id/wp-content/uploads/2022/04/Mie-Godog.jpg', 1),
+(4, 'Nasi Uduk', 10000, 'Nasi yang dimasak dengan santan dan rempah-rempah.', 'https://dcostseafood.id/wp-content/uploads/2023/04/Nasi-Goreng-spesial-2.jpg', 1),
+(5, 'Ayam Goreng', 15000, 'Potongan ayam yang digoreng hingga renyah.', 'https://dcostseafood.id/wp-content/uploads/2021/12/Ayam-Rempah.jpg', 1),
+(6, 'Teh Manis', 5000, 'Minuman teh yang diberi gula.', 'https://dcostseafood.id/wp-content/uploads/2021/12/Teh-tawar-manis.jpg', 2),
+(7, 'Es Jeruk', 10000, 'Minuman segar yang terbuat dari jeruk yang dicampur dengan es.', 'https://dcostseafood.id/wp-content/uploads/2021/12/ES-JERUK-murni.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -114,7 +136,7 @@ CREATE TABLE `transactions` (
   `datetime` datetime NOT NULL,
   `status` text NOT NULL,
   `method` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `transactions`
@@ -144,7 +166,7 @@ CREATE TABLE `users` (
   `email` text NOT NULL,
   `password` text NOT NULL,
   `admin` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -169,7 +191,7 @@ CREATE TABLE `wishlist` (
   `id_user` int(11) NOT NULL,
   `id_item` int(11) NOT NULL,
   `datetime` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `wishlist`
@@ -196,6 +218,12 @@ ALTER TABLE `carts`
   ADD KEY `id_item` (`id_item`);
 
 --
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `detailed_transactions`
 --
 ALTER TABLE `detailed_transactions`
@@ -206,7 +234,8 @@ ALTER TABLE `detailed_transactions`
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_category` (`id_category`);
 
 --
 -- Indexes for table `transactions`
@@ -233,22 +262,28 @@ ALTER TABLE `wishlist`
 --
 
 --
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -267,6 +302,12 @@ ALTER TABLE `carts`
 ALTER TABLE `detailed_transactions`
   ADD CONSTRAINT `detailed_transactions_ibfk_1` FOREIGN KEY (`id_transaction`) REFERENCES `transactions` (`id`),
   ADD CONSTRAINT `detailed_transactions_ibfk_2` FOREIGN KEY (`id_item`) REFERENCES `items` (`id`);
+
+--
+-- Constraints for table `items`
+--
+ALTER TABLE `items`
+  ADD CONSTRAINT `items_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id`);
 
 --
 -- Constraints for table `transactions`
