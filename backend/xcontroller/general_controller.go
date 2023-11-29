@@ -76,7 +76,7 @@ func UserLogin(w http.ResponseWriter, r *http.Request) {
 		if user.Admin {
 			level = "Admin"
 		} else {
-			StartScheduler(user)
+			//StartScheduler(user)
 		}
 
 		var response xmodel.LoginResponse
