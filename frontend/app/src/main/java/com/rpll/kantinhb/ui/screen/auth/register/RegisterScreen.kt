@@ -53,7 +53,9 @@ fun RegisterScreen(
 ) {
     // MutableState untuk menyimpan nilai teks email dan password
     val emailValue = remember { mutableStateOf(TextFieldValue()) }
+    val nameValue = remember { mutableStateOf(TextFieldValue()) }
     val passwordValue = remember { mutableStateOf(TextFieldValue()) }
+    val passwordCheckValue = remember { mutableStateOf(TextFieldValue()) }
     // MutableState untuk menyimpan visibilitas password
     val passwordVisibility = remember { mutableStateOf(false) }
 
@@ -187,9 +189,9 @@ fun RegisterScreen(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 TextField(
-                    value = passwordValue.value,
+                    value = nameValue.value,
                     onValueChange = { newValue ->
-                        passwordValue.value = newValue
+                        nameValue.value = newValue
                     },
                     placeholder = {
                         Text(
@@ -269,9 +271,9 @@ fun RegisterScreen(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 TextField(
-                    value = passwordValue.value,
+                    value = passwordCheckValue.value,
                     onValueChange = { newValue ->
-                        passwordValue.value = newValue
+                        passwordCheckValue.value = newValue
                     },
                     placeholder = {
                         Text(
@@ -299,7 +301,11 @@ fun RegisterScreen(
 
             Button(
                 onClick = {
-                    navController.navigate(KantinHBScreen.LoginScreen.route)
+                    viewModel.performRegister(
+                        nameValue.value.text,
+                        emailValue.value.text,
+                        passwordValue.value.text,
+                        navController)
                 },
                 modifier = Modifier
                     .padding(top = 24.dp)
