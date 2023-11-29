@@ -141,7 +141,7 @@ func GetItem(w http.ResponseWriter, r *http.Request) {
 	var item xmodel.Item
 	query := "SELECT * FROM items WHERE id = ?"
 
-	err := db.QueryRow(query, idItem).Scan(&item.ID, &item.Name, &item.Price, &item.Description)
+	err := db.QueryRow(query, idItem).Scan(&item.ID, &item.Name, &item.Price, &item.Description, &item.Image, &item.CategoryID)
 
 	if err != nil {
 		log.Println(err)
@@ -168,6 +168,8 @@ func UpdateItem(w http.ResponseWriter, r *http.Request) {
 	name := r.Form.Get("name")
 	price := r.Form.Get("price")
 	description := r.Form.Get("description")
+	imagex := r.Form.Get("image")
+	category_idx := r.Form.Get("category_id")
 
 	var item xmodel.Item
 	item.ID, _ = strconv.Atoi(idItem)
@@ -191,6 +193,17 @@ func UpdateItem(w http.ResponseWriter, r *http.Request) {
 
 	if description != "" {
 		item.Description = description
+	}
+
+	if imagex != "" {
+		item.Image = imagex
+	}
+
+	if category_idx != "" {
+		category_idx_int, err := strconv.Atoi(category_idx)
+		if err == nil {
+			item.CategoryID = category_idx_int
+		}
 	}
 
 	query = db.Save(&item)
