@@ -26,5 +26,11 @@ data class DataItems(
 	val description: String,
 
 	@field:SerializedName("id")
-	val id: Int
+	val id: Int,
+
+	@field:SerializedName("category_id")
+	val category_id: Int,
+
+	@field:SerializedName("image")
+	val image: String
 )

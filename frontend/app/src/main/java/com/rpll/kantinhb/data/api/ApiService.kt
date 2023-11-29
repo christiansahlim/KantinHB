@@ -3,6 +3,7 @@ package com.rpll.kantinhb.data.api
 import com.rpll.kantinhb.data.response.AddItemResponse
 import com.rpll.kantinhb.data.response.AddtoCartResponse
 import com.rpll.kantinhb.data.response.CartResponse
+import com.rpll.kantinhb.data.response.CategoriesResponse
 import com.rpll.kantinhb.data.response.CheckoutResponse
 import com.rpll.kantinhb.data.response.DeleteCartResponse
 import com.rpll.kantinhb.data.response.DeleteItemResponse
@@ -58,100 +59,101 @@ interface ApiService {
     fun logout(): Call<LogoutResponse>
 
     // User Endpoint
-    @GET("/users")
-    suspend fun getUsers(
-        @Header("Cookie") token: String
-    ): Response<UsersResponse>
+//    @GET("/users")
+//    suspend fun getUsers(
+//        @Header("Cookie") token: String
+//    ): Response<UsersResponse>
 
-    @GET("/user")
-    suspend fun getUser(
-        @Header("Cookie") token: String,
-        @Query("id") id: Int
-    ): Response<UserResponse>
+//    @GET("/user")
+//    suspend fun getUser(
+//        @Header("Cookie") token: String,
+//        @Query("id") id: Int
+//    ): Response<UserResponse>
 
-    @PUT("/user")
-    @Multipart
-    suspend fun updateUser(
-        @Header("Cookie") token: String,
-        @Part("id") id: RequestBody,
-        @Part("email") email: RequestBody?,
-        @Part("password") password: RequestBody?,
-        @Part("name") name: RequestBody?
-    ): Response<UpdateUserResponse>
+//    @PUT("/user")
+//    @Multipart
+//    suspend fun updateUser(
+//        @Header("Cookie") token: String,
+//        @Part("id") id: RequestBody,
+//        @Part("email") email: RequestBody?,
+//        @Part("password") password: RequestBody?,
+//        @Part("name") name: RequestBody?
+//    ): Response<UpdateUserResponse>
 
-    @DELETE("/user")
-    suspend fun deleteUser(
-        @Header("Cookie") token: String,
-        @Part("id") id: RequestBody
-    ): Response<DeleteUserResponse>
+//    @DELETE("/user")
+//    suspend fun deleteUser(
+//        @Header("Cookie") token: String,
+//        @Part("id") id: RequestBody
+//    ): Response<DeleteUserResponse>
 
     // Item Endpoint
     @GET("/items")
-    suspend fun getItems(
-        @Header("Cookie") token: String
-    ): Response<ItemsResponse>
+    suspend fun getItems(): Response<ItemsResponse>
 
-    @GET("/item")
-    suspend fun getItem(
-        @Header("Cookie") token: String,
-        @Query("id") id: Int
-    ): Response<ItemResponse>
+    @GET("/categories")
+    suspend fun getCategories(): Response<CategoriesResponse>
 
-    @POST("/item")
-    @Multipart
-    suspend fun addItem(
-        @Header("Cookie") token: String,
-        @Part("name") name: RequestBody,
-        @Part("description") description: RequestBody,
-        @Part("price") price: RequestBody
-    ): Response<AddItemResponse>
+//    @GET("/item")
+//    suspend fun getItem(
+//        @Header("Cookie") token: String,
+//        @Query("id") id: Int
+//    ): Response<ItemResponse>
 
-    @PUT("/item")
-    @Multipart
-    suspend fun updateItem(
-        @Header("Cookie") token: String,
-        @Part("id") id: RequestBody,
-        @Part("name") name: RequestBody?,
-        @Part("description") description: RequestBody?,
-        @Part("price") price: RequestBody?
-    ): Response<UpdateItemResponse>
+//    @POST("/item")
+//    @Multipart
+//    suspend fun addItem(
+//        @Header("Cookie") token: String,
+//        @Part("name") name: RequestBody,
+//        @Part("description") description: RequestBody,
+//        @Part("price") price: RequestBody
+//    ): Response<AddItemResponse>
 
-    @DELETE("/item")
-    suspend fun deleteItem(
-        @Header("Cookie") token: String,
-        @Part("id") id: RequestBody
-    ): Response<DeleteItemResponse>
+//    @PUT("/item")
+//    @Multipart
+//    suspend fun updateItem(
+//        @Header("Cookie") token: String,
+//        @Part("id") id: RequestBody,
+//        @Part("name") name: RequestBody?,
+//        @Part("description") description: RequestBody?,
+//        @Part("price") price: RequestBody?
+//    ): Response<UpdateItemResponse>
 
-    // Transaction Endpoint
-    @GET("/transactions/user")
-    suspend fun getTransactionsUser(
-    
-    ): Response<TransactionResponse>
+//    @DELETE("/item")
+//    suspend fun deleteItem(
+//        @Header("Cookie") token: String,
+//        @Part("id") id: RequestBody
+//    ): Response<DeleteItemResponse>
 
-    @GET("/transactions")
-    suspend fun getTransactions(
-        @Header("Cookie") token: String
-    ): Response<TransactionsResponse>
-
-    @GET("/transaction")
-    suspend fun getTransaction(
-        @Header("Cookie") token: String,
-        @Query("id") id: Int
-    ): Response<TransactionResponse>
-
-    @PUT("/transaction")
-    suspend fun updateTransaction(
-        @Header("Cookie") token: String,
-        @Part("id") id: RequestBody,
-        @Part("status") status: RequestBody?,
-        @Part("method") method: RequestBody?
-    ): Response<UpdateTransactionResponse>
-
-    @DELETE("/transaction")
-    suspend fun deleteTransaction(
-        @Header("Cookie") token: String,
-        @Part("id") id: RequestBody
-    ): Response<DeleteTransactionResponse>
+//    // Transaction Endpoint
+//    @GET("/transactions/user")
+//    suspend fun getTransactionsUser(
+//
+//    ): Response<TransactionResponse>
+//
+//    @GET("/transactions")
+//    suspend fun getTransactions(
+//        @Header("Cookie") token: String
+//    ): Response<TransactionsResponse>
+//
+//    @GET("/transaction")
+//    suspend fun getTransaction(
+//        @Header("Cookie") token: String,
+//        @Query("id") id: Int
+//    ): Response<TransactionResponse>
+//
+//    @PUT("/transaction")
+//    suspend fun updateTransaction(
+//        @Header("Cookie") token: String,
+//        @Part("id") id: RequestBody,
+//        @Part("status") status: RequestBody?,
+//        @Part("method") method: RequestBody?
+//    ): Response<UpdateTransactionResponse>
+//
+//    @DELETE("/transaction")
+//    suspend fun deleteTransaction(
+//        @Header("Cookie") token: String,
+//        @Part("id") id: RequestBody
+//    ): Response<DeleteTransactionResponse>
 
     // Cart Endpoint
     @GET("/cart/items")
@@ -159,30 +161,32 @@ interface ApiService {
         @Header("Cookie") token: String
     ): Response<CartResponse>
 
-    @GET("/cart/item")
-    suspend fun getItemFromCart(
-        @Header("Cookie") token: String,
-        @Query("id") id: Int
-    ): Response<CartResponse>
+//    @GET("/cart/item")
+//    suspend fun getItemFromCart(
+//        @Header("Cookie") token: String,
+//        @Query("id") id: Int
+//    ): Response<CartResponse>
 
     @POST("/cart/item")
+    @FormUrlEncoded
     suspend fun addItemToCart(
         @Header("Cookie") token: String,
-        @Part("id") id: RequestBody,
-        @Part("quantity") quantity: RequestBody
+        @Field("id") id: Int,
+        @Field("quantity") quantity: Int
     ): Response<AddtoCartResponse>
 
     @PUT("/cart/item")
+    @FormUrlEncoded
     suspend fun updateCartItem(
         @Header("Cookie") token: String,
-        @Part("id") id: RequestBody,
-        @Part("quantity") quantity: RequestBody
+        @Field("id") id: Int,
+        @Field("quantity") quantity: Int
     ): Response<UpdateCartResponse>
 
     @DELETE("/cart/item")
     suspend fun deleteCartItem(
         @Header("Cookie") token: String,
-        @Part("id") id: RequestBody
+        @Query("id") id: Int
     ): Response<DeleteCartResponse>
 
     @POST("/cart/checkout")
