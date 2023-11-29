@@ -1,25 +1,25 @@
 package com.rpll.kantinhb.data.repository
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import com.rpll.kantinhb.model.Category
-import com.rpll.kantinhb.model.OrderItem
-import com.rpll.kantinhb.model.ProductItem
-import com.rpll.kantinhb.ui.common.UiState
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
-import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.rpll.kantinhb.data.api.ApiConfig
 import com.rpll.kantinhb.data.response.LoginResponse
 import com.rpll.kantinhb.data.response.RegisterResponse
 import com.rpll.kantinhb.data.source.DataSource
+import com.rpll.kantinhb.model.Category
+import com.rpll.kantinhb.model.OrderItem
+import com.rpll.kantinhb.model.ProductItem
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
+import kotlinx.coroutines.runBlocking
 
 class KantinHBRepository private constructor() {
     private val specialSelectionById: List<Long> = arrayListOf(
@@ -40,6 +40,8 @@ class KantinHBRepository private constructor() {
     private var myFavorites = mutableListOf<Long>()
     private val isQuickLogin = mutableStateOf(false)
     private val productsFavorites = mutableListOf<ProductItem>()
+
+    private var token: String = "";
 
     init {
         if (promotions.isEmpty()) {
@@ -87,23 +89,84 @@ class KantinHBRepository private constructor() {
         return flowOf(promotions)
     }
 
+    // done
     fun getAllCategories(): Flow<List<Category>> {
+        categories.clear()
+        runBlocking {
+            try {
+                val response = ApiConfig().getApiService().getCategories();
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    responseBody?.data?.forEach() { it ->
+                        categories.add(
+                            Category(
+                                it.id,
+                                it.name,
+                                it.image
+                            )
+                        )
+                    }
+                }
+            } catch (_: Exception) {
+
+            }
+        }
         return flowOf(categories)
     }
 
+    // done
     fun getSpecialSelection(): Flow<List<ProductItem>> {
+        specialSelection.clear()
+        runBlocking {
+            try {
+                val response = ApiConfig().getApiService().getItems();
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    responseBody?.data?.forEach() { it ->
+                        specialSelection.add(ProductItem(
+                            it.id.toLong(),
+                            it.image,
+                            it.name,
+                            it.price.toDouble(),
+                            it.category_id,
+                            it.description,
+                            it.image
+                        ))
+                    }
+                }
+            } catch (_: Exception) {
+
+            }
+        }
         return flowOf(specialSelection)
     }
 
+    // done
     fun getProductByCategoryId(categoryId: Int): Flow<List<ProductItem>> {
-        Log.e("Product By ID", "CALLED IN HERE")
         productsByCategoryId.clear()
-        DataSource.products().filter {
-            it.category_id == categoryId
-        }.forEach { product ->
-            productsByCategoryId.add(product)
-        }
+        runBlocking {
+            try {
+                val response = ApiConfig().getApiService().getItems();
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    responseBody?.data?.forEach() { it ->
+                        if (it.category_id == categoryId) {
+                            productsByCategoryId.add(ProductItem(
+                                it.id.toLong(),
+                                it.image,
+                                it.name,
+                                it.price.toDouble(),
+                                it.category_id,
+                                it.description,
+                                it.image
+                            ))
+                        }
+                    }
+                }
+            } catch (_: Exception) {
 
+            }
+        }
         return flowOf(productsByCategoryId)
     }
 
@@ -119,43 +182,81 @@ class KantinHBRepository private constructor() {
     }
 
     fun addProductToCart(product: ProductItem, total: Int) {
-        orders.add(
-            OrderItem(
-                item = product,
-                count = total
-            )
-        )
+        runBlocking {
+            ApiConfig().getApiService().addItemToCart(token, product.id.toInt(), total);
+        }
+        reloadCart();
     }
 
     fun updateProductInCart(productId: Long, total: Int): Flow<Boolean> {
-        val index = orders.indexOfFirst { it.item.id == productId }
-        val result = if (index >= 0) {
-            val order = orders[index]
-            orders[index] = order.copy(item = order.item, count = total)
-            true
-        } else {
-            false
+        runBlocking {
+            ApiConfig().getApiService().updateCartItem(token, productId.toInt(), total);
         }
-        return flowOf(result)
+        reloadCart();
+        return flowOf(true)
     }
 
     fun removeProductFromCart(productId: Long): Flow<Boolean> {
-        val index = orders.indexOfFirst { it.item.id == productId }
-        val result = if (index >= 0) {
-            orders.removeAt(index)
-            true
-        } else {
-            false
+        runBlocking {
+            ApiConfig().getApiService().deleteCartItem(token, productId.toInt());
         }
-        return flowOf(result)
+        reloadCart();
+        return flowOf(true)
+    }
+
+    fun reloadCart() {
+        runBlocking {
+            try {
+                val response = ApiConfig().getApiService().getItemsFromCart(token);
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        if (responseBody.status == 200) {
+                            responseBody.data.forEach() { it ->
+                                orders.add(OrderItem(ProductItem(
+                                    it.item.id.toLong(),
+                                    it.item.image,
+                                    it.item.name,
+                                    it.item.price.toDouble(),
+                                    it.item.category_id,
+                                    it.item.description,
+                                    it.item.image
+                                ), it.quantity))
+                            }
+                        }
+                    }
+                }
+            } catch (_: Exception) {
+
+            }
+        }
     }
 
     fun getAllProductInCart(): Flow<List<OrderItem>> {
+        orders.clear()
+        reloadCart()
         return flowOf(orders)
     }
 
     fun removeAllProductsFromCart(): Flow<Boolean> {
-        orders.clear()
+        runBlocking {
+            try {
+                val response = ApiConfig().getApiService().getItemsFromCart(token);
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        if (responseBody.status == 200) {
+                            responseBody.data.forEach() { it ->
+                                ApiConfig().getApiService().deleteCartItem(token, it.item.id);
+                            }
+                        }
+                    }
+                }
+            } catch (_: Exception) {
+
+            }
+        }
+        reloadCart()
         return flowOf(true)
     }
 
@@ -177,11 +278,18 @@ class KantinHBRepository private constructor() {
             }
     }
 
+    // done
     suspend fun Login(email: String, password: String): Result<LoginResponse> {
         return try {
             val response = ApiConfig().getApiService().loginUser(email, password);
             if (response.isSuccessful) {
                 val responseBody = response.body()
+                val cookieList = response.headers().values("Set-Cookie")
+                token = cookieList[0]
+                    .split(";".toRegex())
+                    .dropLastWhile { it.isEmpty() }
+                    .toTypedArray()[0]
+                    //.split("=")[1]
                 Result.success(responseBody!!)
             } else {
                 Result.failure(Exception(response.errorBody()?.string() ?: "Unknown error"))
@@ -204,31 +312,5 @@ class KantinHBRepository private constructor() {
             Result.failure(e)
         }
     }
-
-    // Fungsi untuk melakukan login
-//    fun Login(email: String, password: String): Flow<UiState<Boolean>> {
-//        return performLoginFunction (email, password) { result ->
-//            if (result is UiState.Success) {
-//                _isLoggedIn = true
-//            } else if (result is UiState.Error) {
-//                _errorText = "Login failed. ${result.errorMessage ?: "Unknown error"}"
-//            }
-//        }
-//    }
-//
-//    // Fungsi untuk melakukan registrasi
-//    fun Register(email: String, username: String, password: String): Flow<UiState<Boolean>> {
-//        return performRegisterFunction(email, username, password) { result ->
-//            if (result is UiState.Success) {
-//                performLoginFunction(email, password) { loginResult ->
-//                    if (loginResult is UiState.Error) {
-//                        _errorText = "Login failed. ${loginResult.errorMessage ?: "Unknown error"}"
-//                    }
-//                }
-//            } else if (result is UiState.Error) {
-//                _errorText = "Registration failed. ${result.errorMessage ?: "Unknown error"}"
-//            }
-//        }
-//    }
 }
 

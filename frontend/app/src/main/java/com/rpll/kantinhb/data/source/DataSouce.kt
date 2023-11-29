@@ -15,32 +15,32 @@ object DataSource {
         Category(
             id = 1,
             name = "All Sandwiches",
-            image = R.drawable.menu_all_sandwitch
+            image_url = "https://www.subway.co.id/wp-content/uploads/2021/08/veggie-1.png"
         ),
         Category(
             id = 2,
             name = "Breakfast",
-            image = R.drawable.menu_breakfast
+            image_url = "https://www.subway.co.id/wp-content/uploads/2021/08/veggie-1.png"
         ),
         Category(
             id = 3,
             name = "Wraps",
-            image = R.drawable.menu_wraps
+            image_url = "https://www.subway.co.id/wp-content/uploads/2021/08/veggie-1.png"
         ),
         Category(
             id = 4,
             name = "Salads",
-            image = R.drawable.menu_salads
+            image_url = "https://www.subway.co.id/wp-content/uploads/2021/08/veggie-1.png"
         ),
         Category(
             id = 5,
             name = "Sides",
-            image = R.drawable.menu_sides
+            image_url = "https://www.subway.co.id/wp-content/uploads/2021/08/veggie-1.png"
         ),
         Category(
             id = 6,
             name = "Drinks",
-            image = R.drawable.menu_drinks
+            image_url = "https://www.subway.co.id/wp-content/uploads/2021/08/veggie-1.png"
         ),
     )
 

@@ -2,10 +2,10 @@ package com.rpll.kantinhb.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class CartResponse(
+data class CategoriesResponse(
 
 	@field:SerializedName("data")
-	val data: List<CartItem>,
+	val data: List<DataCategories>,
 
 	@field:SerializedName("message")
 	val message: String,
@@ -14,31 +14,13 @@ data class CartResponse(
 	val status: Int
 )
 
-data class CartItem(
-
-	@field:SerializedName("item")
-	val item: ItemCart,
-
-	@field:SerializedName("quantity")
-	val quantity: Int
-)
-
-data class ItemCart(
-
-	@field:SerializedName("price")
-	val price: Int,
+data class DataCategories(
 
 	@field:SerializedName("name")
 	val name: String,
 
-	@field:SerializedName("description")
-	val description: String,
-
 	@field:SerializedName("id")
 	val id: Int,
-
-	@field:SerializedName("category_id")
-	val category_id: Int,
 
 	@field:SerializedName("image")
 	val image: String
