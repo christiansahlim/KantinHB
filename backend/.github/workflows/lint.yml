@@ -1,0 +1,32 @@
+name: Code Quality Check
+on:
+  push:
+    tags:
+      - v*
+    branches:
+      - master
+      - main
+  pull_request:
+    permissions:
+      contents: read
+jobs:
+  lint:
+    name: Go Code Quality Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.17
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Go code quality check
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.35.2
+          working-directory: .
+          args: --issues-exit-code=0
+          only-new-issues: true
+          skip-cache: false
+          skip-pkg-cache: false
+          skip-build-cache: false
