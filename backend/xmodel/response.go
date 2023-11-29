@@ -35,8 +35,8 @@ type ItemsResponse struct {
 }
 
 type CategoriesResponse struct {
-	Status  int       `json:"status"`
-	Message string    `json:"message"`
+	Status  int        `json:"status"`
+	Message string     `json:"message"`
 	Data    []Category `json:"data"`
 }
 
