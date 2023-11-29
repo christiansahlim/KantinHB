@@ -250,6 +250,16 @@
 									"key": "description",
 									"value": "Air Botol",
 									"type": "default"
+								},
+								{
+									"key": "image",
+									"value": "https://dcostseafood.id/wp-content/uploads/2021/12/Air-Mineral.jpg",
+									"type": "default"
+								},
+								{
+									"key": "category_id",
+									"value": "2",
+									"type": "default"
 								}
 							]
 						},
