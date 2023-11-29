@@ -56,7 +56,7 @@ func GetItems(w http.ResponseWriter, r *http.Request) {
 	var item xmodel.Item
 	var items []xmodel.Item
 	for rows.Next() {
-		if err := rows.Scan(&item.ID, &item.Name, &item.Price, &item.Description); err != nil {
+		if err := rows.Scan(&item.ID, &item.Name, &item.Price, &item.Description, &item.Image, &item.CategoryID); err != nil {
 			xresponse.PrintError(http.StatusNotFound, "No Item Data Inserted To []Item", w)
 			return
 		}
@@ -87,19 +87,23 @@ func AddItem(w http.ResponseWriter, r *http.Request) {
 	name := r.Form.Get("name")
 	price := r.Form.Get("price")
 	description := r.Form.Get("description")
+	imagex := r.Form.Get("image")
+	category_idx := r.Form.Get("category_id")
 
-	var item xmodel.Item
+	var item xmodel.Items
 
 	item.Name = name
 	item.Price, _ = strconv.Atoi(price)
 	item.Description = description
+	item.Image = imagex
+	item.ID_Category, _ = strconv.Atoi(category_idx)
 
-	query := db.Select("name", "price", "description").Create(&item)
+	query := db.Select("name", "price", "description", "image", "id_category").Create(&item)
 
 	if query != nil {
-		xresponse.PrintSuccess(http.StatusOK, "Item Inserted", w)
+		xresponse.PrintSuccess(http.StatusOK, "Item Inserted!", w)
 	} else {
-		xresponse.PrintError(http.StatusInternalServerError, "Insert Item Failed", w)
+		xresponse.PrintError(http.StatusInternalServerError, "Insert Item Failed!", w)
 	}
 }
 
@@ -171,7 +175,7 @@ func UpdateItem(w http.ResponseWriter, r *http.Request) {
 	imagex := r.Form.Get("image")
 	category_idx := r.Form.Get("category_id")
 
-	var item xmodel.Item
+	var item xmodel.Items
 	item.ID, _ = strconv.Atoi(idItem)
 
 	query := db.First(&item, item.ID)
@@ -202,7 +206,7 @@ func UpdateItem(w http.ResponseWriter, r *http.Request) {
 	if category_idx != "" {
 		category_idx_int, err := strconv.Atoi(category_idx)
 		if err == nil {
-			item.CategoryID = category_idx_int
+			item.ID_Category = category_idx_int
 		}
 	}
 

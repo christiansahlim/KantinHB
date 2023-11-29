@@ -57,8 +57,16 @@ func GetTransactionsUser(w http.ResponseWriter, r *http.Request) {
 		}
 
 		for _, detailedTransaction := range detailedTransactions {
-			var item xmodel.Item
-			err = db.First(&item, detailedTransaction.ID_Item).Error
+			var item2 xmodel.Items
+			err = db.First(&item2, detailedTransaction.ID_Item).Error
+			var item = xmodel.Item{
+				ID:       		item2.ID,
+				Name:	 		item2.Name,
+				Price: 			item2.Price,
+				Description: 	item2.Description,
+				Image: 			item2.Image,
+				CategoryID: 	item2.ID_Category,
+			}
 			if err != nil {
 				if err == gorm.ErrRecordNotFound {
 					xresponse.PrintError(http.StatusNotFound, "Item not found", w)
@@ -134,8 +142,16 @@ func GetTransactions(w http.ResponseWriter, r *http.Request) {
 		}
 
 		for _, detailedTransaction := range detailedTransactions {
-			var item xmodel.Item
-			err = db.First(&item, detailedTransaction.ID_Item).Error
+			var item2 xmodel.Items
+			err = db.First(&item2, detailedTransaction.ID_Item).Error
+			var item = xmodel.Item{
+				ID:       		item2.ID,
+				Name:	 		item2.Name,
+				Price: 			item2.Price,
+				Description: 	item2.Description,
+				Image: 			item2.Image,
+				CategoryID: 	item2.ID_Category,
+			}
 			if err != nil {
 				if err == gorm.ErrRecordNotFound {
 					xresponse.PrintError(http.StatusNotFound, "Item not found", w)
@@ -212,8 +228,16 @@ func GetTransaction(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for _, detailedTransaction := range detailedTransactions {
-		var item xmodel.Item
-		err = db.First(&item, detailedTransaction.ID_Item).Error
+		var item2 xmodel.Items
+		err = db.First(&item2, detailedTransaction.ID_Item).Error
+		var item = xmodel.Item{
+			ID:       		item2.ID,
+			Name:	 		item2.Name,
+			Price: 			item2.Price,
+			Description: 	item2.Description,
+			Image: 			item2.Image,
+			CategoryID: 	item2.ID_Category,
+		}
 		if err != nil {
 			if err == gorm.ErrRecordNotFound {
 				xresponse.PrintError(http.StatusNotFound, "Item not found", w)

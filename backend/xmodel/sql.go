@@ -2,6 +2,15 @@ package xmodel
 
 import "time"
 
+type Items struct {
+	ID          int    `json:"id"`
+	Name        string `json:"name"`
+	Price       int    `json:"price"`
+	Description string `json:"description"`
+	Image 		string `json:"image"`
+	ID_Category int    `json:"id_category"`
+}
+
 type Carts struct {
 	ID_User  int `json:"id_user"`
 	ID_Item  int `json:"id_item"`
