@@ -40,11 +40,11 @@ import retrofit2.http.Query
 
 interface ApiService {
     @POST("/register")
-    @Multipart
+    @FormUrlEncoded
     suspend fun registerUser(
-        @Part("email") email: RequestBody,
-        @Part("password") password: RequestBody,
-        @Part("name") name: RequestBody
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("password") password: String
     ): Response<RegisterResponse>
 
     @POST("/login")

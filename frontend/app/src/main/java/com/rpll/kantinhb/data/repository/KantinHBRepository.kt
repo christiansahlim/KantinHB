@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.setValue
 import com.rpll.kantinhb.data.api.ApiConfig
 import com.rpll.kantinhb.data.response.LoginResponse
+import com.rpll.kantinhb.data.response.RegisterResponse
 import com.rpll.kantinhb.data.source.DataSource
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -179,6 +180,20 @@ class KantinHBRepository private constructor() {
     suspend fun Login(email: String, password: String): Result<LoginResponse> {
         return try {
             val response = ApiConfig().getApiService().loginUser(email, password);
+            if (response.isSuccessful) {
+                val responseBody = response.body()
+                Result.success(responseBody!!)
+            } else {
+                Result.failure(Exception(response.errorBody()?.string() ?: "Unknown error"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun Register(name:String, email: String,password: String): Result<RegisterResponse> {
+        return try {
+            val response = ApiConfig().getApiService().registerUser(name, email, password);
             if (response.isSuccessful) {
                 val responseBody = response.body()
                 Result.success(responseBody!!)
