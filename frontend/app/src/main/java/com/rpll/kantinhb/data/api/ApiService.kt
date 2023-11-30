@@ -190,7 +190,10 @@ interface ApiService {
     ): Response<DeleteCartResponse>
 
     @POST("/cart/checkout")
+    @FormUrlEncoded
     suspend fun checkoutCart(
-        @Header("Cookie") token: String
+        @Header("Cookie") token: String,
+        @Field("method") method: String,
+        @Field("status") status: String,
     ): Response<CheckoutResponse>
 }

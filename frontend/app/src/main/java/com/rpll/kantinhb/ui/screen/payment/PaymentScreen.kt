@@ -190,8 +190,7 @@ private fun LandscapeVersion(
 
                 Button(
                     onClick = {
-                        navController.navigate(KantinHBScreen.SuccessPayment.route)
-                        viewModel.removeAllProductsFromCart()
+                        viewModel.checkoutCart(navController)
                     },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -252,14 +251,13 @@ private fun PortraitVersion(
                             }
                         }
 
-                        ButtonRow()
+                        ButtonRow(viewModel)
 
                         PaymentSummary(viewModel, totalPayment)
 
                         Button(
                             onClick = {
-                                navController.navigate(KantinHBScreen.SuccessPayment.route)
-                                viewModel.removeAllProductsFromCart()
+                                viewModel.checkoutCart(navController)
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -411,7 +409,7 @@ private fun PaymentSummaryItem(desc: String, number: Double) {
 }
 
 @Composable
-fun ButtonRow() {
+fun ButtonRow(viewModel: PaymentViewModel) {
     var cashClicked by remember { mutableStateOf(false) }
     var ewalletClicked by remember { mutableStateOf(false) }
 
@@ -434,6 +432,8 @@ fun ButtonRow() {
                 onClick = {
                     cashClicked = true
                     ewalletClicked = false
+                    viewModel.cashClicked.value = true
+                    viewModel.ewalletClicked.value = false
                 },
                 modifier = Modifier
                     .weight(1f)
@@ -457,6 +457,8 @@ fun ButtonRow() {
                 onClick = {
                     ewalletClicked = true
                     cashClicked = false
+                    viewModel.ewalletClicked.value = true
+                    viewModel.cashClicked.value = false
                 },
                 modifier = Modifier
                     .weight(1f)

@@ -3,8 +3,10 @@ package com.rpll.kantinhb.ui.screen.payment
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import com.rpll.kantinhb.data.repository.KantinHBRepository
 import com.rpll.kantinhb.model.OrderItem
+import com.rpll.kantinhb.navigation.KantinHBScreen
 import com.rpll.kantinhb.ui.common.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,6 +36,8 @@ private val repository: KantinHBRepository
 
     val totalPriceInCart = mutableStateOf(0.0)
 
+    val cashClicked = mutableStateOf(false)
+    val ewalletClicked = mutableStateOf(false)
 
     fun getProductsInPayment() {
         viewModelScope.launch {
@@ -82,19 +86,11 @@ private val repository: KantinHBRepository
         }
     }
 
-    fun removeAllProductsFromCart() {
+    fun checkoutCart(navController: NavController) {
         viewModelScope.launch {
-            repository.removeAllProductsFromCart()
-                .catch {
-                    _removeUiState.value = UiState.Error(it.message.toString())
-                }
-                .collect { items ->
-                    // Set total price to 0 because all products are removed
-                    totalPriceInCart.value = 0.0
-
-                    // Update UI State after removing all products
-                    _removeUiState.value = UiState.Success(items)
-                }
+            val method = if (cashClicked.value) "Cash" else (if (ewalletClicked.value) "E-wallet" else "Unknown");
+            repository.Checkout(method, "Success")
+            navController.navigate(KantinHBScreen.SuccessPayment.route)
         }
     }
 }
