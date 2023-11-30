@@ -28,7 +28,7 @@ func GetRandomItems(amount int) ([]xmodel.Item, error) {
 	var items []xmodel.Item
 	var item xmodel.Item
 	for rows.Next() {
-		if err := rows.Scan(&item.ID, &item.Name, &item.Price, &item.Description); err != nil {
+		if err := rows.Scan(&item.ID, &item.Name, &item.Price, &item.Description, &item.Image, &item.CategoryID); err != nil {
 			return nil, err
 		}
 		items = append(items, item)
