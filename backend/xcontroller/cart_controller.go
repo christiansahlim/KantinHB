@@ -33,9 +33,16 @@ func GetItemsFromCart(w http.ResponseWriter, r *http.Request) {
 	// Get detailed information about each item in the user's cart
 	var detailedCart []xmodel.DetailedCart
 	for _, cartItem := range cartItems {
-		var item xmodel.Item
-
-		err := db.First(&item, cartItem.ID_Item).Error
+		var item2 xmodel.Items
+		err = db.First(&item2, cartItem.ID_Item).Error
+		var item = xmodel.Item{
+			ID:       		item2.ID,
+			Name:	 		item2.Name,
+			Price: 			item2.Price,
+			Description: 	item2.Description,
+			Image: 			item2.Image,
+			CategoryID: 	item2.ID_Category,
+		}
 		if err != nil {
 			xresponse.PrintError(http.StatusInternalServerError, "Failed to retrieve item", w)
 			return
@@ -82,8 +89,16 @@ func GetItemFromCart(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Get detailed information about the item in the user's cart
-	var item xmodel.Item
-	err = db.First(&item, itemID).Error
+	var item2 xmodel.Items
+	err = db.First(&item2, itemID).Error
+	var item = xmodel.Item{
+		ID:       		item2.ID,
+		Name:	 		item2.Name,
+		Price: 			item2.Price,
+		Description: 	item2.Description,
+		Image: 			item2.Image,
+		CategoryID: 	item2.ID_Category,
+	}
 	if err != nil {
 		xresponse.PrintError(http.StatusInternalServerError, "Failed to retrieve item", w)
 		return
@@ -119,8 +134,8 @@ func AddItemToCart(w http.ResponseWriter, r *http.Request) {
 	xresponse.CheckError(erry)
 
 	// Check if the item ID is valid
-	var item xmodel.Item
-	err = db.First(&item, id).Error
+	var item2 xmodel.Items
+	err = db.First(&item2, id).Error
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			xresponse.PrintError(http.StatusNotFound, "Item not found", w)
@@ -173,8 +188,8 @@ func UpdateCartItem(w http.ResponseWriter, r *http.Request) {
 	xresponse.CheckError(erry)
 
 	// Check if the item ID is valid
-	var item xmodel.Item
-	err = db.First(&item, id).Error
+	var item2 xmodel.Items
+	err = db.First(&item2, id).Error
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			xresponse.PrintError(http.StatusNotFound, "Item not found", w)
@@ -281,7 +296,16 @@ func CheckoutCart(w http.ResponseWriter, r *http.Request) {
 	// Calculate the total cost of the transaction
 	totalCost := 0
 	for _, item := range cart {
-		var dbItem xmodel.Item
+		var item2 xmodel.Items
+		err = db.First(&item2, item.ID_Item).Error
+		var dbItem = xmodel.Item{
+			ID:       		item2.ID,
+			Name:	 		item2.Name,
+			Price: 			item2.Price,
+			Description: 	item2.Description,
+			Image: 			item2.Image,
+			CategoryID: 	item2.ID_Category,
+		}
 		err = db.First(&dbItem, item.ID_Item).Error
 		if err != nil {
 			if err == gorm.ErrRecordNotFound {
@@ -334,8 +358,16 @@ func CheckoutCart(w http.ResponseWriter, r *http.Request) {
 
 	// Add the items in the cart to the transaction
 	for _, item := range cart {
-		var dbItem xmodel.Item
-		err = db.First(&dbItem, item.ID_Item).Error
+		var item2 xmodel.Items
+		err = db.First(&item2, item.ID_Item).Error
+		var dbItem = xmodel.Item{
+			ID:       		item2.ID,
+			Name:	 		item2.Name,
+			Price: 			item2.Price,
+			Description: 	item2.Description,
+			Image: 			item2.Image,
+			CategoryID: 	item2.ID_Category,
+		}
 		if err != nil {
 			if err == gorm.ErrRecordNotFound {
 				xresponse.PrintError(http.StatusNotFound, "Item not found", w)
