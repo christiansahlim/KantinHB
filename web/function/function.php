@@ -11,86 +11,6 @@ function query($query)
     return $rows;
 }
 
-function tambahAkun($data)
-{
-    global $conn;
-
-    $username = htmlspecialchars($data["username"]);
-    $email = htmlspecialchars($data["email"]);
-    $password = htmlspecialchars($data["password"]);
-
-    $query = "INSERT INTO akun VALUES (
-           '',
-           '$username',
-           '$email',
-           '$password',
-           'member'
-        )";
-    mysqli_query($conn, $query);
-    return mysqli_affected_rows($conn);
-}
-
-function tambahPembelian($data, $idKatalog)
-{
-    global $conn;
-
-    $nama_pembeli = htmlspecialchars($data["nama_pembeli"]);
-    $id_mobile_legend = htmlspecialchars($data["id_mobile_legend"]);
-    $metode_pembayaran = htmlspecialchars($data["metode_pembayaran"][0]);
-
-    setcookie("nama_pembeli", $nama_pembeli, time() + (86400 * 30), "/");
-    setcookie("id_mobile_legend", $id_mobile_legend, time() + (86400 * 30), "/");
-
-    $query = "INSERT INTO pembelian VALUES (
-           '',
-           '$nama_pembeli',
-           '$id_mobile_legend',
-           '$metode_pembayaran',
-           '$idKatalog'
-        )";
-    mysqli_query($conn, $query);
-    return mysqli_affected_rows($conn);
-}
-
-function tambahInfoOrder($idKatalog, $nama_pembeli, $id_mobile_legend, $metode_pembayaran, $nama_paket, $harga, $diamond)
-{
-    global $conn;
-    $query = "INSERT INTO info_order VALUES (
-           '$idKatalog',
-           '$nama_pembeli',
-           '$id_mobile_legend',
-           '$metode_pembayaran',
-           '$nama_paket',
-           '$harga',
-           '$diamond'
-        )";
-    mysqli_query($conn, $query);
-    return mysqli_affected_rows($conn);
-}
-
-function tambahKatalog($data)
-{
-    global $conn;
-
-    $nama_paket = $data["nama_paket"];
-    $harga = $data["harga"];
-    $diamond = $data["diamond"];
-    $gambar = upload();
-    if (!$gambar) {
-        return false;
-    }
-
-    $query = "INSERT INTO katalog VALUES (
-           '',
-           '$nama_paket',
-           '$harga',
-           '$diamond',
-           '$gambar'
-        )";
-    mysqli_query($conn, $query);
-    return mysqli_affected_rows($conn);
-}
-
 function upload()
 {
     $namaFile = $_FILES["image"]["name"];
@@ -135,40 +55,6 @@ function upload()
     // lolos pengecekan, gambar siap diupload
     move_uploaded_file($tmpName, '../asset/img/' . $namaFileBaru);
     return $namaFileBaru;
-}
-
-function hapusKatalog($id)
-{
-    global $conn;
-    mysqli_query($conn, "DELETE FROM katalog WHERE idKatalog = $id");
-    return mysqli_affected_rows($conn);
-}
-
-function ubahKatalog($data, $id)
-{
-    global $conn;
-    // $id = $_GET["id"];
-    $nama_paket = $data["nama_paket"];
-    $harga = $data["harga"];
-    $diamond = $data["diamond"];
-    $gambarLama = $data["gambarLama"];
-
-    // cek apakah user pilih gambar baru atau tidak
-    if ($_FILES['image']['error'] === 4) {
-        $gambar = $gambarLama;
-    } else {
-        $gambar = upload();
-    }
-
-    $query = "UPDATE katalog SET
-       nama_paket = '$nama_paket',
-       harga = '$harga',
-       diamond = '$diamond',
-       image = '$gambar' 
-       WHERE idKatalog = $id
-    ";
-    mysqli_query($conn, $query);
-    return mysqli_affected_rows($conn);
 }
 
 function get_cookie_safely($n) {
