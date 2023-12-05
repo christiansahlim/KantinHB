@@ -41,9 +41,9 @@ func main() {
 	// Item Endpoint
 	router.HandleFunc("/items", c.GetItems).Methods("GET")
 	router.HandleFunc("/item", c.GetItem).Methods("GET")
-	router.HandleFunc("/item", xhandler.Authenticate(c.AddItem, true)).Methods("POST")
-	router.HandleFunc("/item", xhandler.Authenticate(c.UpdateItem, true)).Methods("PUT")
-	router.HandleFunc("/item", xhandler.Authenticate(c.DeleteItem, true)).Methods("DELETE")
+	router.HandleFunc("/item", c.AddItem).Methods("POST")
+	router.HandleFunc("/item", c.UpdateItem).Methods("PUT")
+	router.HandleFunc("/item", c.DeleteItem).Methods("DELETE")
 
 	// Transaction Endpoint
 	router.HandleFunc("/transactions/user", xhandler.Authenticate(c.GetTransactionsUser, false)).Methods("GET")
