@@ -1,0 +1,21 @@
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+.navigation {
+  margin-left: 70%;
+}
+
+.slider {
+  height: 89vh;
+}
+
+.info-paket{
+  border-radius: 19px;
+}
+
+.form{
+  border-radius: 30px;
+}
+
+/*# sourceMappingURL=style.css.map */
