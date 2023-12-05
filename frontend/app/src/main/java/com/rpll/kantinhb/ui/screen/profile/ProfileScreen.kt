@@ -86,7 +86,11 @@ fun ProfileScreen(
                 ProfileRowItem(icon = Icons.Default.Group, title = "Invite friends", navController = navController)
                 ProfileRowItem(icon = Icons.Default.Fingerprint, title = "Quick login", isQuickLogin = isQuickLogin, viewModel = viewModel, navController = navController)
                 ProfileRowItem(icon = Icons.Default.AccountCircle, title = "Manage accounts", navController = navController)
-                ProfileRowItem(icon = Icons.Default.Logout, title = "Log Out", navController = navController)
+                ProfileRowItem(
+                    icon = Icons.Default.Logout,
+                    title = "Log Out",
+                    navigateRoute = KantinHBScreen.LoginScreen.route,
+                    navController = navController)
             }
 
             TitleSubtitle(title = "General", subtitle = "General settings access")
