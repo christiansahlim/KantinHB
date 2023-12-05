@@ -56,6 +56,7 @@ fun ProfileScreen(
         }
     }
 
+
     Scaffold(
         topBar = { TopBackBar(navController = navController, currentPage = "My Profile") }
     ) { innerPadding ->
@@ -85,7 +86,7 @@ fun ProfileScreen(
                 ProfileRowItem(icon = Icons.Default.Group, title = "Invite friends", navController = navController)
                 ProfileRowItem(icon = Icons.Default.Fingerprint, title = "Quick login", isQuickLogin = isQuickLogin, viewModel = viewModel, navController = navController)
                 ProfileRowItem(icon = Icons.Default.AccountCircle, title = "Manage accounts", navController = navController)
-                ProfileRowItem(icon = Icons.Default.Security, title = "Account safety", navController = navController)
+                ProfileRowItem(icon = Icons.Default.Logout, title = "Log Out", navController = navController)
             }
 
             TitleSubtitle(title = "General", subtitle = "General settings access")
@@ -107,7 +108,7 @@ fun ProfileRowItem(
     isShowBadge: Boolean = false,
     viewModel: ProfileViewModel? = null,
     navigateRoute: String? = null,
-    navController: NavController
+    navController: NavController,
 ) {
     Column(
         modifier = Modifier
@@ -186,6 +187,7 @@ fun ProfileRowItem(
 
         Divider(modifier = Modifier.padding(top = 8.dp))
     }
+
 }
 
 @Composable
